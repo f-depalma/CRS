@@ -9,6 +9,10 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class RMIServerImpl implements RMIServer {
 
@@ -22,9 +26,22 @@ public class RMIServerImpl implements RMIServer {
     public void startServer(){
         Registry registry = null;
         try {
+            Connection con = DBConnector.getConnection();
+
+            PreparedStatement stat = con.prepareStatement("select * from app_user");
+
+            ResultSet res = stat.executeQuery();
+
+            if (res.next()) {
+                String str = res.getString("username");
+                System.out.println(str);
+            }
+
             registry = LocateRegistry.createRegistry(1099);
             registry.bind("LoginServer", this);
         } catch (RemoteException | AlreadyBoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
