@@ -1,6 +1,7 @@
 package server.networking;
 
 import server.model.LoginManager;
+import server.QueriesBook;
 import shared.networking.ClientCallback;
 import shared.networking.RMIServer;
 
@@ -28,7 +29,7 @@ public class RMIServerImpl implements RMIServer {
         try {
             Connection con = DBConnector.getConnection();
 
-            PreparedStatement stat = con.prepareStatement("select * from app_user");
+            PreparedStatement stat = con.prepareStatement(QueriesBook.SELECT_ALL_USERS);
 
             ResultSet res = stat.executeQuery();
 
