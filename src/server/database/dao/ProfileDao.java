@@ -1,10 +1,10 @@
 package server.database.dao;
 
+import server.database.Connection;
 import server.database.QueriesBook;
 import server.database.DBConnector;
 import server.database.entity.Profile;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,10 +13,8 @@ import java.util.Optional;
 
 public class ProfileDao implements Dao<Profile, Integer> {
     private static ProfileDao instance = null;
-    protected static Optional<Connection> connection = null;
 
     private ProfileDao() {
-        connection = DBConnector.getConnection();
     }
 
     public static ProfileDao getInstance() {
@@ -39,23 +37,22 @@ public class ProfileDao implements Dao<Profile, Integer> {
 
     @Override
     public Optional<Profile> get(int id) {
-        return connection.flatMap(conn -> {
-            Optional<Profile> profileOpt = Optional.empty();
+        Connection conn = DBConnector.getConnection();
+        Optional<Profile> profileOpt = Optional.empty();
 
-            try {
-                PreparedStatement statement = conn.prepareStatement(QueriesBook.SELECT_FROM_PROFILE_WHERE_ID);
-                statement.setInt(1, id);
-                ResultSet resultSet = statement.executeQuery();
+        try {
+            PreparedStatement statement = conn.prepareStatement(QueriesBook.SELECT_FROM_PROFILE_WHERE_ID);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
 
-                if (resultSet.next()) {
-                    profileOpt = Optional.of(rowToEntity(resultSet));
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
+            if (resultSet.next()) {
+                profileOpt = Optional.of(rowToEntity(resultSet));
             }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
 
-            return profileOpt;
-        });
+        return profileOpt;
     }
 
     @Override

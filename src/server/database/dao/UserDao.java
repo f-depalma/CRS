@@ -1,10 +1,10 @@
 package server.database.dao;
 
+import server.database.Connection;
 import server.database.QueriesBook;
 import server.database.DBConnector;
 import server.database.entity.User;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,10 +13,8 @@ import java.util.Optional;
 
 public class UserDao implements Dao<User, Integer> {
     private static UserDao instance = null;
-    protected static Optional<Connection> connection = null;
 
     private UserDao() {
-        connection = DBConnector.getConnection();
     }
 
     public static UserDao getInstance() {
@@ -40,24 +38,24 @@ public class UserDao implements Dao<User, Integer> {
     }
 
     public Optional<Integer> getIdByUsernameAndPassword(String username, String password) {
-        return connection.flatMap(conn -> {
-            Optional<Integer> idOpt = Optional.empty();
+        Connection conn = DBConnector.getConnection();
+        Optional<Integer> idOpt = Optional.empty();
 
-            try {
-                PreparedStatement statement = conn.prepareStatement(QueriesBook.SELECT_ID_FROM_USER_WHERE_USERNAME_AND_PASSWORD);
-                statement.setString(1, username);
-                statement.setString(2, password);
-                ResultSet resultSet = statement.executeQuery();
+        try {
+            PreparedStatement statement = conn.prepareStatement(QueriesBook.SELECT_ID_FROM_USER_WHERE_USERNAME_AND_PASSWORD);
+            statement.setString(1, username);
+            statement.setString(2, password);
+            ResultSet resultSet = statement.executeQuery();
 
-                if (resultSet.next()) {
-                    idOpt = Optional.of(resultSet.getInt("id"));
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
+            if (resultSet.next()) {
+                idOpt = Optional.of(resultSet.getInt("id"));
             }
+            conn.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
 
-            return idOpt;
-        });
+        return idOpt;
     }
 
 
