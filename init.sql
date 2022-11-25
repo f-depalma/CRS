@@ -1,16 +1,16 @@
 CREATE SCHEMA CRS;
 SET SCHEMA 'crs';
 
--- drop table profile;
--- drop table app_user;
+drop table profile;
+drop table app_user;
 
 CREATE TABLE app_user
 (
-    profile_id   BIGSERIAL                                NOT NULL,
+    id   BIGSERIAL                                NOT NULL,
     username VARCHAR(30)                              NOT NULL,
     password     VARCHAR(30)
         CONSTRAINT passLen CHECK ( length(password) >= 8) NOT NULL,
-    PRIMARY KEY (profile_id),
+    PRIMARY KEY (id),
     UNIQUE (username, password)
 );
 
@@ -24,7 +24,7 @@ CREATE TABLE profile
     type       VARCHAR(1)
         CONSTRAINT check_allowed CHECK (type in ('S', 'T', 'A')) NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (id) REFERENCES app_user (profile_id)
+    FOREIGN KEY (id) REFERENCES app_user (id)
 );
 
 -- INSERT ADMIN ACCOUNT
@@ -32,7 +32,7 @@ INSERT INTO app_user(username, password)
 VALUES ('admin', 'adminadmin');
 
 INSERT INTO profile(id, first_name, last_name, email, birthday, type)
-VALUES ((select profile_id from app_user where username = 'admin' and password = 'adminadmin'),
+VALUES ((select id from app_user where username = 'admin' and password = 'adminadmin'),
         'Ad', 'min', 'admin@admin.ad', '1993-06-17', 'A')
 
 

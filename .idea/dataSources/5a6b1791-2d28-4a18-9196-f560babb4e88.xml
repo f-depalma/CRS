@@ -3,7 +3,7 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.43">
     <root id="1">
       <DateStyle>mdy</DateStyle>
-      <IntrospectionStateNumber>10673</IntrospectionStateNumber>
+      <IntrospectionStateNumber>10687</IntrospectionStateNumber>
       <ServerVersion>14.5</ServerVersion>
       <StartupTime>1669143443</StartupTime>
       <TimeZones>true ACDT
@@ -801,11 +801,11 @@ false Zulu
 13654||10|C|G
 13654||-9223372036854775808|U|G
 13654||10|U|G</Grants>
-      <IntrospectionStateNumber>10673</IntrospectionStateNumber>
+      <IntrospectionStateNumber>10687</IntrospectionStateNumber>
       <ObjectId>14020</ObjectId>
       <Relations>sequence|table|16814|16815|1
-sequence|table|16977|16978|1
-sequence|table|16987|16988|1
+sequence|table|17000|17001|1
+sequence|table|17010|17011|1
 </Relations>
       <OwnerName>postgres</OwnerName>
     </database>
@@ -4221,7 +4221,7 @@ sequence|table|16987|16988|1
       <ValidatorSchema>pg_catalog</ValidatorSchema>
     </language>
     <schema id="260" parent="2" name="crs">
-      <IntrospectionStateNumber>10673</IntrospectionStateNumber>
+      <IntrospectionStateNumber>10687</IntrospectionStateNumber>
       <ObjectId>16853</ObjectId>
       <StateNumber>10602</StateNumber>
       <OwnerName>postgres</OwnerName>
@@ -4250,7 +4250,7 @@ sequence|table|16987|16988|1
     <schema id="265" parent="2" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>10673</IntrospectionStateNumber>
+      <IntrospectionStateNumber>10687</IntrospectionStateNumber>
       <ObjectId>2200</ObjectId>
       <StateNumber>527</StateNumber>
       <OwnerName>postgres</OwnerName>
@@ -4260,27 +4260,27 @@ sequence|table|16987|16988|1
       <StateNumber>737</StateNumber>
       <OwnerName>postgres</OwnerName>
     </schema>
-    <sequence id="267" parent="260" name="app_user_profile_id_seq">
+    <sequence id="267" parent="260" name="app_user_id_seq">
       <DataType>bigint|0s</DataType>
-      <ObjectId>16977</ObjectId>
-      <StateNumber>10671</StateNumber>
+      <ObjectId>17000</ObjectId>
+      <StateNumber>10683</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
     <sequence id="268" parent="260" name="profile_id_seq">
       <DataType>bigint|0s</DataType>
-      <ObjectId>16987</ObjectId>
-      <StateNumber>10672</StateNumber>
+      <ObjectId>17010</ObjectId>
+      <StateNumber>10684</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
     <table id="269" parent="260" name="app_user">
-      <ObjectId>16978</ObjectId>
-      <StateNumber>10672</StateNumber>
+      <ObjectId>17001</ObjectId>
+      <StateNumber>10684</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
     <table id="270" parent="260" name="profile">
-      <ObjectId>16988</ObjectId>
-      <StateNumber>10672</StateNumber>
+      <ObjectId>17011</ObjectId>
+      <StateNumber>10684</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
@@ -4322,38 +4322,38 @@ sequence|table|16987|16988|1
     </table>
     <check id="277" parent="269" name="passlen">
       <ColNames>password</ColNames>
-      <ObjectId>16982</ObjectId>
+      <ObjectId>17005</ObjectId>
       <Predicate>length((password)::text) &gt;= 8</Predicate>
-      <StateNumber>10671</StateNumber>
+      <StateNumber>10683</StateNumber>
     </check>
-    <column id="278" parent="269" name="profile_id">
+    <column id="278" parent="269" name="id">
       <DataType>bigint|0s</DataType>
-      <DefaultExpression>nextval(&apos;crs.app_user_profile_id_seq&apos;::regclass)</DefaultExpression>
+      <DefaultExpression>nextval(&apos;crs.app_user_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>10671</StateNumber>
+      <StateNumber>10683</StateNumber>
       <TypeId>20</TypeId>
     </column>
     <column id="279" parent="269" name="username">
       <DataType>varchar(30)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>10671</StateNumber>
+      <StateNumber>10683</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="280" parent="269" name="password">
       <DataType>varchar(30)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
-      <StateNumber>10671</StateNumber>
+      <StateNumber>10683</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <index id="281" parent="269" name="app_user_pkey">
-      <ColNames>profile_id</ColNames>
+      <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16983</ObjectId>
+      <ObjectId>17006</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>10671</StateNumber>
+      <StateNumber>10683</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
@@ -4361,8 +4361,8 @@ sequence|table|16987|16988|1
       <ColNames>username
 password</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16985</ObjectId>
-      <StateNumber>10671</StateNumber>
+      <ObjectId>17008</ObjectId>
+      <StateNumber>10683</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
       <CollationIds>100
@@ -4374,88 +4374,88 @@ pg_catalog</CollationParentNames>
     </index>
     <key id="283" parent="269" name="app_user_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16984</ObjectId>
+      <ObjectId>17007</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>10671</StateNumber>
-      <UnderlyingIndexId>16983</UnderlyingIndexId>
+      <StateNumber>10683</StateNumber>
+      <UnderlyingIndexId>17006</UnderlyingIndexId>
     </key>
     <key id="284" parent="269" name="app_user_username_password_key">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16986</ObjectId>
-      <StateNumber>10671</StateNumber>
-      <UnderlyingIndexId>16985</UnderlyingIndexId>
+      <ObjectId>17009</ObjectId>
+      <StateNumber>10683</StateNumber>
+      <UnderlyingIndexId>17008</UnderlyingIndexId>
     </key>
     <check id="285" parent="270" name="check_allowed">
       <ColNames>type</ColNames>
-      <ObjectId>16992</ObjectId>
+      <ObjectId>17015</ObjectId>
       <Predicate>(type)::text = ANY ((ARRAY[&apos;S&apos;::character varying, &apos;T&apos;::character varying, &apos;A&apos;::character varying])::text[])</Predicate>
-      <StateNumber>10672</StateNumber>
+      <StateNumber>10684</StateNumber>
     </check>
     <column id="286" parent="270" name="id">
       <DataType>bigint|0s</DataType>
       <DefaultExpression>nextval(&apos;crs.profile_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>10672</StateNumber>
+      <StateNumber>10684</StateNumber>
       <TypeId>20</TypeId>
     </column>
     <column id="287" parent="270" name="first_name">
       <DataType>varchar(30)|0s</DataType>
       <Position>2</Position>
-      <StateNumber>10672</StateNumber>
+      <StateNumber>10684</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="288" parent="270" name="last_name">
       <DataType>varchar(30)|0s</DataType>
       <Position>3</Position>
-      <StateNumber>10672</StateNumber>
+      <StateNumber>10684</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="289" parent="270" name="email">
       <DataType>varchar(30)|0s</DataType>
       <Position>4</Position>
-      <StateNumber>10672</StateNumber>
+      <StateNumber>10684</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="290" parent="270" name="birthday">
       <DataType>date|0s</DataType>
       <Position>5</Position>
-      <StateNumber>10672</StateNumber>
+      <StateNumber>10684</StateNumber>
       <TypeId>1082</TypeId>
     </column>
     <column id="291" parent="270" name="type">
       <DataType>varchar(1)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>6</Position>
-      <StateNumber>10672</StateNumber>
+      <StateNumber>10684</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <foreign-key id="292" parent="270" name="profile_id_fkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16995</ObjectId>
-      <RefColNames>profile_id</RefColNames>
+      <ObjectId>17018</ObjectId>
+      <RefColNames>id</RefColNames>
       <RefColPositions>1</RefColPositions>
-      <StateNumber>10672</StateNumber>
-      <RefTableId>16978</RefTableId>
+      <StateNumber>10684</StateNumber>
+      <RefTableId>17001</RefTableId>
       <RefTableName>app_user</RefTableName>
       <RefTableKind>table</RefTableKind>
     </foreign-key>
     <index id="293" parent="270" name="profile_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16993</ObjectId>
+      <ObjectId>17016</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>10672</StateNumber>
+      <StateNumber>10684</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
     <key id="294" parent="270" name="profile_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16994</ObjectId>
+      <ObjectId>17017</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>10672</StateNumber>
-      <UnderlyingIndexId>16993</UnderlyingIndexId>
+      <StateNumber>10684</StateNumber>
+      <UnderlyingIndexId>17016</UnderlyingIndexId>
     </key>
     <check id="295" parent="272" name="blood_donations_amount_check">
       <ColNames>amount</ColNames>

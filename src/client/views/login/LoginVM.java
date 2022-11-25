@@ -20,13 +20,14 @@ public class LoginVM {
 
 
     public void logIn() {
-        String user = inputUser.get();
+        String username = inputUser.get();
         String password = inputPassword.get();
-        if (checker(user) && checker(password)) {
+        if (checker(username) && checker(password)) {
             error.set("");
         } else {
             error.set("No matching username or password");
         }
+        loginManager.login(username, password);
     }
 
     public StringProperty getInputUser() {

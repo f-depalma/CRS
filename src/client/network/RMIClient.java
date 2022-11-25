@@ -2,6 +2,8 @@ package client.network;
 
 import shared.networking.ClientCallback;
 import shared.networking.RMIServer;
+import shared.transferobject.dto.ProfileDTO;
+import shared.transferobject.dto.UserDTO;
 
 import java.beans.PropertyChangeSupport;
 import java.rmi.RemoteException;
@@ -29,14 +31,23 @@ public class RMIClient implements Client, ClientCallback {
     @Override
     public void startClient() {
         Registry registry = null;
-/*        try {
+        try {
             registry = LocateRegistry.getRegistry("localhost", 1099);
-            server = (RMIServer) registry.lookup("ChatServer");
+            server = (RMIServer) registry.lookup("Server");
             server.registerCallback( this);
         } catch (RemoteException | NotBoundException e) {
             e.printStackTrace();
-        }*/
+        }
+    }
 
+    @Override
+    public ProfileDTO login(UserDTO userDTO) {
+        try {
+            return server.login(userDTO);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override

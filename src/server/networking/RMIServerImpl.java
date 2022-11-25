@@ -1,54 +1,50 @@
 package server.networking;
 
 import server.model.LoginManager;
-import server.QueriesBook;
+import server.model.LoginManagerImpl;
 import shared.networking.ClientCallback;
 import shared.networking.RMIServer;
+import shared.transferobject.dto.ProfileDTO;
+import shared.transferobject.dto.UserDTO;
+import shared.transferobject.mapper.ProfileMapper;
+import shared.transferobject.mapper.UserMapper;
 
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class RMIServerImpl implements RMIServer {
 
     private LoginManager loginManager;
+    private UserMapper userMapper;
+    private ProfileMapper profileMapper;
 
     public RMIServerImpl(LoginManager loginManager) throws RemoteException {
         UnicastRemoteObject.exportObject(this, 0);
+        this.userMapper = UserMapper.getInstance();
+        this.profileMapper = ProfileMapper.getInstance();
         this.loginManager = loginManager;
     }
 
-    public void startServer(){
+    public void startServer() {
         Registry registry = null;
         try {
-            Connection con = DBConnector.getConnection();
-
-            PreparedStatement stat = con.prepareStatement(QueriesBook.SELECT_ALL_USERS);
-
-            ResultSet res = stat.executeQuery();
-
-            if (res.next()) {
-                String str = res.getString("username");
-                System.out.println(str);
-            }
-
             registry = LocateRegistry.createRegistry(1099);
-            registry.bind("LoginServer", this);
+            registry.bind("Server", this);
         } catch (RemoteException | AlreadyBoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-
-
+    @Override
+    public ProfileDTO login(UserDTO userDTO) {
+        return profileMapper.entityToDTO(
+                loginManager.login(
+                        userMapper.DTOToEntity(userDTO)
+                ));
+    }
 
     @Override
     public void registerCallback(ClientCallback ccb) throws RemoteException {
