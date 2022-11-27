@@ -30,7 +30,7 @@ public class LoginVM {
             error.set("No matching username or password");
         }
         ProfileDTO p = loginManager.login(username, password);
-        System.out.println(p.getName() + " " + p.getLastname());
+        System.out.println(p);
     }
 
     public StringProperty getInputUser() {
