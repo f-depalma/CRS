@@ -2,7 +2,12 @@ package shared.transferobject.mapper;
 
 import server.database.entity.Profile;
 import shared.transferobject.dto.ProfileDTO;
+import shared.util.UserType;
+import shared.util.Utils;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,11 +26,12 @@ public class ProfileMapper implements Mapper<Profile, ProfileDTO> {
     @Override
     public ProfileDTO entityToDTO(Profile entity) {
         try {
+            SimpleDateFormat format = new SimpleDateFormat(Utils.DATE_FORMAT);
             return new ProfileDTO(
                     entity.getFirstName(),
                     entity.getLastName(),
                     entity.getEmail(),
-                    entity.getBirthday(),
+                    format.format(entity.getBirthday()),
                     entity.getType()
             );
         } catch (Exception e) {
@@ -40,8 +46,19 @@ public class ProfileMapper implements Mapper<Profile, ProfileDTO> {
         entity.setFirstName(dto.getName());
         entity.setLastName(dto.getLastname());
         entity.setEmail(dto.getEmail());
-        entity.setBirthday(dto.getBirthday());
-        entity.setType(dto.getType());
+        SimpleDateFormat format = new SimpleDateFormat(Utils.DATE_FORMAT);
+        System.out.println(dto.getBirthday());
+        java.util.Date parsed = null;
+        Date sql = null;
+        try {
+            parsed = format.parse(dto.getBirthday());
+            sql = new java.sql.Date(parsed.getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        entity.setBirthday(sql);
+        entity.setType(UserType.getValue(dto.getType()));
         return entity;
     }
 

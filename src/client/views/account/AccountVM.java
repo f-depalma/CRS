@@ -16,6 +16,7 @@ public class AccountVM {
     private StringProperty passwordField;
     private BooleanProperty isStudent;
     private BooleanProperty isTeacher;
+    private StringProperty birthday;
     private Account accountManager;
 
     public AccountVM(Account account) {
@@ -27,6 +28,7 @@ public class AccountVM {
         passwordField = new SimpleStringProperty();
         isStudent = new SimpleBooleanProperty();
         isTeacher = new SimpleBooleanProperty();
+        birthday = new SimpleStringProperty();
     }
 
     public void createAccount() {
@@ -36,13 +38,20 @@ public class AccountVM {
         String password = passwordField.get();
         boolean isStudent = this.isStudent.get();
         boolean isTeacher = this.isTeacher.get();
+        String birthday = this.birthday.get();
 
-        if (stringChecker(fistName) && stringChecker(lastName) && stringChecker(email) && stringChecker(password) && booleanChecker(isStudent || isTeacher)) {
+        if (stringChecker(fistName)
+                && stringChecker(lastName)
+                && stringChecker(email)
+                && stringChecker(password)
+                && booleanChecker(isStudent || isTeacher)
+                && stringChecker(birthday)) {
+
             error.set("");
             UserDTO userDTO = new UserDTO(email, password);
             try {
-                ProfileDTO profileDTO = new ProfileDTO(fistName, lastName, email, null,
-                        isStudent ? "S" : isTeacher ? "T": "");
+                ProfileDTO profileDTO = new ProfileDTO(fistName, lastName, email, birthday,
+                        isStudent ? "S" : isTeacher ? "T" : "");
                 ProfileDTO p = accountManager.createAccount(userDTO, profileDTO);
                 if (p != null) {
                     System.out.println(p);
@@ -75,6 +84,9 @@ public class AccountVM {
         return passwordField;
     }
 
+    public StringProperty getBirthday() {
+        return birthday;
+    }
 
     public BooleanProperty getIsStudentProperty() {
         return isStudent;

@@ -1,13 +1,11 @@
 package shared.util;
 
-import java.util.List;
-
 public class Utils {
-    private static final List<String> TYPES = List.of("A", "S", "T");
 
+    public static final String DATE_FORMAT = "MM/dd/yyyy";
     public static String checkProfileType(String type) throws Exception {
         if (type.length() == 1)
-            if (TYPES.contains(type))
+            if (UserType.getEnum(type) != null)
                 return type;
         throw new Exception("Profile type doesn't exist");
     }

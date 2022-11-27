@@ -1,23 +1,25 @@
 package shared.transferobject.dto;
 
+import shared.util.UserType;
 import shared.util.Utils;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Locale;
 
 public class ProfileDTO implements Serializable {
     private String name;
     private String lastname;
     private String email;
-    private Date birthday;
-    private String type;
+    private String birthday;
+    private UserType.TYPE type;
 
-    public ProfileDTO(String name, String lastname, String email, Date birthday, String type) throws Exception {
+    public ProfileDTO(String name, String lastname, String email, String birthday, String type) throws Exception {
         this.name = name;
         this.lastname = lastname;
         this.email = Utils.checkEmail(email);
         this.birthday = birthday;
-        this.type = Utils.checkProfileType(type);
+        this.type = UserType.getEnum(Utils.checkProfileType(type));
     }
 
     public String getName() {
@@ -44,19 +46,19 @@ public class ProfileDTO implements Serializable {
         this.email = email;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
-    public String getType() {
+    public UserType.TYPE getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(UserType.TYPE type) {
         this.type = type;
     }
 
@@ -67,7 +69,7 @@ public class ProfileDTO implements Serializable {
                 ", lastname='" + lastname + '\'' +
                 ", email='" + email + '\'' +
                 ", birthday=" + birthday +
-                ", type='" + type + '\'' +
+                ", type='" + type.name().toLowerCase(Locale.ROOT) + '\'' +
                 '}';
     }
 }

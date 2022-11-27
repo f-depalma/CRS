@@ -72,7 +72,7 @@ public class ProfileDao implements Dao<Profile> {
             statement.setDate(5, profile.getBirthday());
             statement.setString(6, profile.getType());
 
-            ResultSet resultSet = statement.executeQuery();
+            statement.executeQuery();
 
         } catch (SQLException e) {
             e.printStackTrace();

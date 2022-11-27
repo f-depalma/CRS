@@ -38,6 +38,9 @@ public class AccountCourseController implements ViewController {
     @FXML
     public ToggleGroup profileType;
 
+    @FXML
+    public DatePicker birthday;
+
     private ViewHandler viewHandler;
     private AccountVM accountVM;
 
@@ -53,6 +56,7 @@ public class AccountCourseController implements ViewController {
         passwordAccountField.textProperty().bindBidirectional(accountVM.getPasswordField());
         studentButton.selectedProperty().bindBidirectional(accountVM.getIsStudentProperty());
         teacherButton.selectedProperty().bindBidirectional(accountVM.getIsTeacherProperty());
+        birthday.getEditor().textProperty().bindBidirectional(accountVM.getBirthday());
     }
 
     public void onBackButton(ActionEvent event) throws IOException {
