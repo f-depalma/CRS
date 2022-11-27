@@ -1,14 +1,14 @@
 CREATE SCHEMA CRS;
 SET SCHEMA 'crs';
 
-drop table profile;
-drop table app_user;
+-- drop table profile;
+-- drop table app_user;
 
 CREATE TABLE app_user
 (
-    id   BIGSERIAL                                NOT NULL,
-    username VARCHAR(30)                              NOT NULL,
-    password     VARCHAR(30)
+    id       BIGSERIAL                                    NOT NULL,
+    username VARCHAR(30)                                  NOT NULL,
+    password VARCHAR(30)
         CONSTRAINT passLen CHECK ( length(password) >= 8) NOT NULL,
     PRIMARY KEY (id),
     UNIQUE (username, password)
@@ -33,9 +33,9 @@ VALUES ('admin', 'adminadmin');
 
 INSERT INTO profile(id, first_name, last_name, email, birthday, type)
 VALUES ((select id from app_user where username = 'admin' and password = 'adminadmin'),
-        'Ad', 'min', 'admin@admin.ad', '1993-06-17', 'A')
+        'Ad', 'min', 'admin@admin.ad', '1993-06-17', 'A');
 
 
--- select * from app_user;
--- select * from profile;
+select * from app_user;
+select * from profile;
 

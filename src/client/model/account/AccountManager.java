@@ -1,6 +1,8 @@
 package client.model.account;
 
 import client.network.Client;
+import shared.transferobject.dto.ProfileDTO;
+import shared.transferobject.dto.UserDTO;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -22,6 +24,11 @@ public class AccountManager implements Account {
     }
 
     @Override
+    public ProfileDTO createAccount(UserDTO userDTO, ProfileDTO profileDTO) {
+        return client.createAccount(userDTO, profileDTO);
+    }
+
+    @Override
     public void addListener(String eventName, PropertyChangeListener listener) {
         support.addPropertyChangeListener(eventName, listener);
     }
@@ -30,6 +37,8 @@ public class AccountManager implements Account {
     public void removeListener(String eventName, PropertyChangeListener listener) {
         support.removePropertyChangeListener(eventName, listener);
     }
+
+
 }
 
 

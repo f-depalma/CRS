@@ -1,8 +1,10 @@
 package client.views.login;
 
 import client.model.login.Login;
+import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import shared.transferobject.dto.ProfileDTO;
 
 public class LoginVM {
 
@@ -27,7 +29,8 @@ public class LoginVM {
         } else {
             error.set("No matching username or password");
         }
-        loginManager.login(username, password);
+        ProfileDTO p = loginManager.login(username, password);
+        System.out.println(p.getName() + " " + p.getLastname());
     }
 
     public StringProperty getInputUser() {

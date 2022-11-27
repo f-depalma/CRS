@@ -10,4 +10,5 @@ public interface Client extends Subject {
     void startClient();
 
     ProfileDTO login(UserDTO userDTO);
+    ProfileDTO createAccount(UserDTO userDTO, ProfileDTO profileDTO);
 }

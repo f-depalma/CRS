@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Optional;
 
-public class UserDao implements Dao<User, Integer> {
+public class UserDao implements Dao<User> {
     private static UserDao instance = null;
 
     private UserDao() {
@@ -65,8 +65,17 @@ public class UserDao implements Dao<User, Integer> {
     }
 
     @Override
-    public Optional<Integer> save(User user) {
-        return Optional.empty();
+    public void save(User user) {
+        Connection conn = DBConnector.getConnection();
+        try {
+            PreparedStatement statement = conn.prepareStatement(QueriesBook.INSERT_INTO_APP_USER_ALL_VALUES);
+            statement.setString(1, user.getUsername());
+            statement.setString(2, user.getPassword());
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

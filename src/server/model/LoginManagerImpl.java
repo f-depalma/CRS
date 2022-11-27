@@ -23,6 +23,11 @@ public class LoginManagerImpl implements LoginManager {
     }
 
     @Override
+    public Profile createAccount(User user, Profile profile) {
+        return loginService.createUser(user, profile);
+    }
+
+    @Override
     public void addListener(String eventName, PropertyChangeListener listener) {
         support.addPropertyChangeListener(eventName, listener);
     }

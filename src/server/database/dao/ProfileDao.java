@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Optional;
 
-public class ProfileDao implements Dao<Profile, Integer> {
+public class ProfileDao implements Dao<Profile> {
     private static ProfileDao instance = null;
 
     private ProfileDao() {
@@ -61,8 +61,23 @@ public class ProfileDao implements Dao<Profile, Integer> {
     }
 
     @Override
-    public Optional<Integer> save(Profile profile) {
-        return Optional.empty();
+    public void save(Profile profile) {
+        Connection conn = DBConnector.getConnection();
+        try {
+            PreparedStatement statement = conn.prepareStatement(QueriesBook.INSERT_INTO_PROFILE_ALL_VALUES);
+            statement.setInt(1, profile.getId());
+            statement.setString(2, profile.getFirstName());
+            statement.setString(3, profile.getLastName());
+            statement.setString(4, profile.getEmail());
+            statement.setDate(5, profile.getBirthday());
+            statement.setString(6, profile.getType());
+
+            ResultSet resultSet = statement.executeQuery();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override

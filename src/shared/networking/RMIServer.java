@@ -8,5 +8,6 @@ import java.rmi.RemoteException;
 
 public interface RMIServer extends Remote {
     ProfileDTO login(UserDTO userDTO) throws RemoteException;
+    ProfileDTO createAccount(UserDTO userDTO, ProfileDTO profileDTO) throws RemoteException;
     void registerCallback(ClientCallback ccb) throws RemoteException;
 }

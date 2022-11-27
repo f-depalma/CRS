@@ -35,4 +35,25 @@ public class LoginServiceImpl implements LoginService {
 
         return profile;
     }
+
+    @Override
+    public Profile createUser(User user, Profile profile) {
+        UserDao userDao = UserDao.getInstance();
+        ProfileDao profileDao = ProfileDao.getInstance();
+        userDao.save(user);
+
+        Optional<Integer> userIdOpt = userDao.getIdByUsernameAndPassword(user.getUsername(), user.getPassword());
+
+
+        if (userIdOpt.isPresent()) {
+            int userId = userIdOpt.get();
+            profile.setId(userId);
+            profileDao.save(profile);
+            Optional<Profile> profileOpt = profileDao.get(userId);
+            if (profileOpt.isPresent()) {
+                return profileOpt.get();
+            }
+        }
+        return null;
+    }
 }

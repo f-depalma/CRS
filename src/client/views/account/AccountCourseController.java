@@ -5,9 +5,7 @@ import client.core.ViewModelFactory;
 import client.views.ViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 
@@ -20,10 +18,10 @@ public class AccountCourseController implements ViewController {
     public TextField lastNameField;
 
     @FXML
-    public Button studentButton;
+    public RadioButton studentButton;
 
     @FXML
-    public Button teacherButton;
+    public RadioButton teacherButton;
 
     @FXML
     public TextField emailField;
@@ -36,6 +34,9 @@ public class AccountCourseController implements ViewController {
 
     @FXML
     public TextField passwordAccountField;
+
+    @FXML
+    public ToggleGroup profileType;
 
     private ViewHandler viewHandler;
     private AccountVM accountVM;
@@ -50,6 +51,8 @@ public class AccountCourseController implements ViewController {
         errorLabelAccount.textProperty().bindBidirectional(accountVM.getError());
         emailField.textProperty().bindBidirectional(accountVM.getEmailField());
         passwordAccountField.textProperty().bindBidirectional(accountVM.getPasswordField());
+        studentButton.selectedProperty().bindBidirectional(accountVM.getIsStudentProperty());
+        teacherButton.selectedProperty().bindBidirectional(accountVM.getIsTeacherProperty());
     }
 
     public void onBackButton(ActionEvent event) throws IOException {

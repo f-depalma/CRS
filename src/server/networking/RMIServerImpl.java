@@ -47,6 +47,15 @@ public class RMIServerImpl implements RMIServer {
     }
 
     @Override
+    public ProfileDTO createAccount(UserDTO userDTO, ProfileDTO profileDTO) throws RemoteException {
+        return profileMapper.entityToDTO(
+                loginManager.createAccount(
+                        userMapper.DTOToEntity(userDTO),
+                        profileMapper.DTOToEntity(profileDTO)
+                ));
+    }
+
+    @Override
     public void registerCallback(ClientCallback ccb) throws RemoteException {
         loginManager.addListener("Message", evt -> {
         });

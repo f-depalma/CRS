@@ -6,8 +6,8 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 public class DBConnector {
-    private static int maxConnection = 5;
-    private static int minConnectionAvailable = 2;
+    private static final int MAX_CONNECTION = 5;
+    private static final int MIN_CONNECTION_AVAILABLE = 2;
 
     private static Deque<Connection> connections = new ArrayDeque<>();
 
@@ -17,10 +17,11 @@ public class DBConnector {
         while (toCheck > 0) {
             switch (connections.getFirst().getStatus()) {
                 case OPEN -> connections.addLast(connections.pop());
-                case ERROR -> connections.pop().close();
+                case ERROR -> connections.pop();
                 case CLOSED -> {
                     Connection con = connections.pop();
                     con.setStatus(ConnectionStatus.OPEN);
+                    connections.addLast(con);
                     clean();
                     return con;
                 }
@@ -50,15 +51,15 @@ public class DBConnector {
     }
 
     private static void clean() {
-        if (connections.size() > maxConnection) {
+        if (connections.size() > MAX_CONNECTION) {
             int closed = 0;
 
             for (Connection con : connections) {
                 if (con.getStatus().equals(ConnectionStatus.CLOSED)) closed++;
             }
 
-            if (closed > minConnectionAvailable) {
-                int toRemove = closed - minConnectionAvailable;
+            if (closed > MIN_CONNECTION_AVAILABLE) {
+                int toRemove = closed - MIN_CONNECTION_AVAILABLE;
                 for (Connection con : connections) {
                     if (con.getStatus().equals(ConnectionStatus.CLOSED)) {
                         connections.remove(con);

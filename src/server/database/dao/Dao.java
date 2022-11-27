@@ -5,16 +5,16 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Optional;
 
-public interface Dao<T, I> {
-    T rowToEntity(ResultSet res) throws SQLException;
+public interface Dao<E> {
+    E rowToEntity(ResultSet res) throws SQLException;
 
-    Optional<T> get(int id);
+    Optional<E> get(int id);
 
-    Collection<T> getAll();
+    Collection<E> getAll();
 
-    Optional<I> save(T t);
+    void save(E t);
 
-    void update(T t);
+    void update(E t);
 
-    void delete(T t);
+    void delete(E t);
 }

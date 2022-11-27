@@ -51,6 +51,16 @@ public class RMIClient implements Client, ClientCallback {
     }
 
     @Override
+    public ProfileDTO createAccount(UserDTO userDTO, ProfileDTO profileDTO) {
+        try {
+            return server.createAccount(userDTO, profileDTO);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
     public void addListener(String eventName, PropertyChangeListener listener) {
         support.addPropertyChangeListener(eventName, listener);
     }

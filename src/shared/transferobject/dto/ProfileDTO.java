@@ -59,4 +59,15 @@ public class ProfileDTO implements Serializable {
     public void setType(String type) {
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        return "ProfileDTO{" +
+                "name='" + name + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", email='" + email + '\'' +
+                ", birthday=" + birthday +
+                ", type='" + type + '\'' +
+                '}';
+    }
 }
