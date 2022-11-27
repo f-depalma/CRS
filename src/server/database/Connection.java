@@ -5,26 +5,32 @@ import java.sql.SQLException;
 
 public class Connection {
     private java.sql.Connection connection;
-    private ConnectionStatus status;
+    private STATUS status;
+
+    public enum STATUS {
+        OPEN,
+        CLOSED,
+        ERROR
+    }
 
     public Connection() {
-        this.status = ConnectionStatus.ERROR;
+        this.status = STATUS.ERROR;
     }
 
     public Connection(java.sql.Connection connection) {
         this.connection = connection;
-        this.status = ConnectionStatus.OPEN;
+        this.status = STATUS.OPEN;
     }
 
     public java.sql.Connection getConnection() {
         return connection;
     }
 
-    public ConnectionStatus getStatus() {
+    public STATUS getStatus() {
         return status;
     }
 
-    public void setStatus(ConnectionStatus status) {
+    public void setStatus(STATUS status) {
         this.status = status;
     }
 
@@ -33,6 +39,6 @@ public class Connection {
     }
 
     public void close() {
-        this.status = ConnectionStatus.CLOSED;
+        this.status = STATUS.CLOSED;
     }
 }

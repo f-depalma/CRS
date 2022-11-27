@@ -50,11 +50,10 @@ public class UserDao implements Dao<User> {
             if (resultSet.next()) {
                 idOpt = Optional.of(resultSet.getInt("id"));
             }
-            conn.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
+        conn.close();
         return idOpt;
     }
 
@@ -76,6 +75,7 @@ public class UserDao implements Dao<User> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        conn.close();
     }
 
     @Override

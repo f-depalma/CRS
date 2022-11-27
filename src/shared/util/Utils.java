@@ -1,8 +1,12 @@
 package shared.util;
 
+import java.text.SimpleDateFormat;
+
 public class Utils {
 
-    public static final String DATE_FORMAT = "MM/dd/yyyy";
+    private static final String _DATE_FORMAT = "MM/dd/yyyy";
+    public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat(_DATE_FORMAT);
+
     public static String checkProfileType(String type) throws Exception {
         if (type.length() == 1)
             if (UserType.getEnum(type) != null)

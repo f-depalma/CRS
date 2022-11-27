@@ -9,6 +9,12 @@ public class DBConnector {
     private static final int MAX_CONNECTION = 5;
     private static final int MIN_CONNECTION_AVAILABLE = 2;
 
+    // Database configuration
+    private static final String NAME = "postgres";
+    private static final String USER = "postgres";
+    private static final String PASSWORD = "admin";
+    private static final String CURRENT_SCHEMA = "crs";
+
     private static Deque<Connection> connections = new ArrayDeque<>();
 
     public static Connection getConnection() {
@@ -20,7 +26,7 @@ public class DBConnector {
                 case ERROR -> connections.pop();
                 case CLOSED -> {
                     Connection con = connections.pop();
-                    con.setStatus(ConnectionStatus.OPEN);
+                    con.setStatus(Connection.STATUS.OPEN);
                     connections.addLast(con);
                     clean();
                     return con;
@@ -35,14 +41,9 @@ public class DBConnector {
     }
 
     private static Connection createConnection() {
-        String databaseName = "postgres";
-        String databaseUser = "postgres";
-        String password = "admin";
-        String currentSchema = "crs";
-        String url = "jdbc:postgresql://localhost:5432/" + databaseName + "?currentSchema=" + currentSchema;
-
+        String url = "jdbc:postgresql://localhost:5432/" + NAME + "?currentSchema=" + CURRENT_SCHEMA;
         try {
-            return new Connection(DriverManager.getConnection(url, databaseUser, password));
+            return new Connection(DriverManager.getConnection(url, USER, PASSWORD));
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -55,13 +56,13 @@ public class DBConnector {
             int closed = 0;
 
             for (Connection con : connections) {
-                if (con.getStatus().equals(ConnectionStatus.CLOSED)) closed++;
+                if (con.getStatus().equals(Connection.STATUS.CLOSED)) closed++;
             }
 
             if (closed > MIN_CONNECTION_AVAILABLE) {
                 int toRemove = closed - MIN_CONNECTION_AVAILABLE;
                 for (Connection con : connections) {
-                    if (con.getStatus().equals(ConnectionStatus.CLOSED)) {
+                    if (con.getStatus().equals(Connection.STATUS.CLOSED)) {
                         connections.remove(con);
                     }
                     toRemove--;

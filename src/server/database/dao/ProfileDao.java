@@ -51,7 +51,7 @@ public class ProfileDao implements Dao<Profile> {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
+        conn.close();
         return profileOpt;
     }
 
@@ -73,11 +73,10 @@ public class ProfileDao implements Dao<Profile> {
             statement.setString(6, profile.getType());
 
             statement.executeQuery();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        conn.close();
     }
 
     @Override
