@@ -4,6 +4,7 @@ import server.model.LoginManager;
 import server.model.LoginManagerImpl;
 import shared.networking.ClientCallback;
 import shared.networking.RMIServer;
+import shared.transferobject.dto.CourseDTO;
 import shared.transferobject.dto.ProfileDTO;
 import shared.transferobject.dto.UserDTO;
 import shared.transferobject.mapper.ProfileMapper;
@@ -14,6 +15,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
 
 public class RMIServerImpl implements RMIServer {
 
@@ -46,6 +48,27 @@ public class RMIServerImpl implements RMIServer {
                 ));
     }
 
+    // TODO: implement this method (Sprint 2)
+    @Override
+    public List<CourseDTO> getFavoriteCourses(int profileId) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public boolean removeFavoriteCourses(List<Integer> courseIds) throws RemoteException {
+        return false;
+    }
+
+    @Override
+    public List<CourseDTO> getAllCourses(String filter) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public boolean addFavoriteCourses(List<Integer> courseIds, int profileId) throws RemoteException {
+        return false;
+    }
+
     @Override
     public ProfileDTO createAccount(UserDTO userDTO, ProfileDTO profileDTO) throws RemoteException {
         return profileMapper.entityToDTO(
@@ -60,4 +83,6 @@ public class RMIServerImpl implements RMIServer {
         loginManager.addListener("Message", evt -> {
         });
     }
+
+
 }

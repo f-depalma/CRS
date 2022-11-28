@@ -14,8 +14,7 @@ import java.util.Optional;
 public class ProfileDao implements Dao<Profile> {
     private static ProfileDao instance = null;
 
-    private ProfileDao() {
-    }
+    private ProfileDao() {}
 
     public static ProfileDao getInstance() {
         if (instance == null)

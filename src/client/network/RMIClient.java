@@ -2,6 +2,7 @@ package client.network;
 
 import shared.networking.ClientCallback;
 import shared.networking.RMIServer;
+import shared.transferobject.dto.CourseDTO;
 import shared.transferobject.dto.ProfileDTO;
 import shared.transferobject.dto.UserDTO;
 
@@ -12,6 +13,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.NotBoundException;
 import java.beans.PropertyChangeListener;
+import java.util.List;
 
 public class RMIClient implements Client, ClientCallback {
 
@@ -58,6 +60,27 @@ public class RMIClient implements Client, ClientCallback {
             e.printStackTrace();
         }
         return null;
+    }
+
+    // TODO: implements this methods (Sprint 2)
+    @Override
+    public List<CourseDTO> getFavoriteCourses(int profileId) {
+        return null;
+    }
+
+    @Override
+    public boolean removeFavoriteCourses(List<Integer> courseIds) {
+        return false;
+    }
+
+    @Override
+    public List<CourseDTO> getAllCourses(String filter) {
+        return null;
+    }
+
+    @Override
+    public boolean addFavoriteCourses(List<Integer> courseIds, int profileId) {
+        return false;
     }
 
     @Override
