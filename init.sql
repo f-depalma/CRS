@@ -31,6 +31,7 @@ CREATE TABLE profile
     FOREIGN KEY (id) REFERENCES app_user (id)
 );
 
+<<<<<<< HEAD
 CREATE TABLE program
 (
     short_name VARCHAR(10),
@@ -54,6 +55,27 @@ CREATE TABLE favorite_course
     FOREIGN KEY (profile_id) REFERENCES profile (id),
     FOREIGN KEY (course_name) REFERENCES course (short_name),
     PRIMARY KEY (profile_id, course_name)
+=======
+CREATE TABLE program (
+    program_id VARCHAR(3) NOT NULL,
+    program_name VARCHAR(30),
+    PRIMARY KEY (program_id)
+);
+
+CREATE TABLE courses (
+    course_id VARCHAR(3) NOT NULL,
+    course_name VARCHAR(30),
+    course_program VARCHAR(3) NOT NULL,
+    PRIMARY KEY (course_id),
+    FOREIGN KEY (course_program) REFERENCES program(program_id)
+);
+
+CREATE TABLE favorite_courses (
+    profile BIGSERIAL,
+    favorite_course_id VARCHAR(3) NOT NULL,
+    FOREIGN KEY (profile) REFERENCES profile(id),
+    FOREIGN KEY (favorite_course_id) REFERENCES courses(course_id)
+>>>>>>> 7c196de4b9f481cf1fdc6e571009829e4f2bbd43
 );
 
 -- INSERT ADMIN ACCOUNT
