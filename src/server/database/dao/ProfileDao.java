@@ -8,13 +8,14 @@ import server.database.entity.Profile;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 public class ProfileDao implements Dao<Profile> {
     private static ProfileDao instance = null;
 
-    private ProfileDao() {}
+    private ProfileDao() {
+    }
 
     public static ProfileDao getInstance() {
         if (instance == null)
@@ -55,12 +56,12 @@ public class ProfileDao implements Dao<Profile> {
     }
 
     @Override
-    public Collection<Profile> getAll() {
+    public List<Profile> getAll() {
         return null;
     }
 
     @Override
-    public void save(Profile profile) {
+    public boolean save(Profile profile) {
         Connection conn = DBConnector.getConnection();
         try {
             PreparedStatement statement = conn.prepareStatement(QueriesBook.INSERT_INTO_PROFILE_ALL_VALUES);
@@ -74,17 +75,19 @@ public class ProfileDao implements Dao<Profile> {
             statement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
         conn.close();
+        return true;
     }
 
     @Override
-    public void update(Profile profile) {
-
+    public boolean update(Profile profile) {
+        return false;
     }
 
     @Override
-    public void delete(Profile profile) {
-
+    public boolean delete(Profile profile) {
+        return false;
     }
 }

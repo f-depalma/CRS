@@ -1,6 +1,7 @@
 package shared.networking;
 
 import shared.transferobject.dto.CourseDTO;
+import shared.transferobject.dto.FavoriteCourseDTO;
 import shared.transferobject.dto.ProfileDTO;
 import shared.transferobject.dto.UserDTO;
 
@@ -17,10 +18,10 @@ public interface RMIServer extends Remote {
 
     List<CourseDTO> getFavoriteCourses(int profileId) throws RemoteException;
 
-    boolean removeFavoriteCourses(List<Integer> courseIds) throws RemoteException;
+    boolean removeFavoriteCourses(List<FavoriteCourseDTO> favoriteCourseDTOS) throws RemoteException;
 
     List<CourseDTO> getAllCourses(String filter) throws RemoteException;
 
-    boolean addFavoriteCourses(List<Integer> courseIds, int profileId) throws RemoteException;
+    boolean addFavoriteCourses(List<String> courseNames, int profileId) throws RemoteException;
 
 }

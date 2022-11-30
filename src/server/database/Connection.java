@@ -1,5 +1,7 @@
 package server.database;
 
+import java.security.PublicKey;
+import java.sql.Array;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -36,6 +38,10 @@ public class Connection {
 
     public PreparedStatement prepareStatement(String query) throws SQLException {
         return connection.prepareStatement(query);
+    }
+
+    public Array createArrayOf(String typeName, Object[] elements) throws SQLException {
+        return connection.createArrayOf(typeName, elements);
     }
 
     public void close() {

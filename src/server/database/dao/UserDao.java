@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 public class UserDao implements Dao<User> {
@@ -59,12 +60,12 @@ public class UserDao implements Dao<User> {
 
 
     @Override
-    public Collection<User> getAll() {
+    public List<User> getAll() {
         return null;
     }
 
     @Override
-    public void save(User user) {
+    public boolean save(User user) {
         Connection conn = DBConnector.getConnection();
         try {
             PreparedStatement statement = conn.prepareStatement(QueriesBook.INSERT_INTO_APP_USER_ALL_VALUES);
@@ -74,17 +75,19 @@ public class UserDao implements Dao<User> {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
         conn.close();
+        return true;
     }
 
     @Override
-    public void update(User user) {
-
+    public boolean update(User user) {
+        return false;
     }
 
     @Override
-    public void delete(User user) {
-
+    public boolean delete(User user) {
+        return false;
     }
 }

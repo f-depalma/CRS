@@ -3,6 +3,7 @@ package server.database.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 public interface Dao<E> {
@@ -10,11 +11,11 @@ public interface Dao<E> {
 
     Optional<E> get(int id);
 
-    Collection<E> getAll();
+    List<E> getAll();
 
-    void save(E t);
+    boolean save(E t);
 
-    void update(E t);
+    boolean update(E t);
 
-    void delete(E t);
+    boolean delete(E t);
 }

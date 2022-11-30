@@ -50,7 +50,7 @@ public class AccountVM {
             error.set("");
             UserDTO userDTO = new UserDTO(email, password);
             try {
-                ProfileDTO profileDTO = new ProfileDTO(fistName, lastName, email, birthday,
+                ProfileDTO profileDTO = new ProfileDTO(-1, fistName, lastName, email, birthday,
                         isStudent ? "S" : isTeacher ? "T" : "");
                 ProfileDTO p = accountManager.createAccount(userDTO, profileDTO);
                 if (p != null) {

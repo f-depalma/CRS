@@ -84,3 +84,4 @@ from profile;
 select *
 from course;
 
+select * from course where short_name in ('SEP2');

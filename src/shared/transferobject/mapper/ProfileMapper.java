@@ -27,6 +27,7 @@ public class ProfileMapper implements Mapper<Profile, ProfileDTO> {
         try {
 
             return new ProfileDTO(
+                    entity.getId(),
                     entity.getFirstName(),
                     entity.getLastName(),
                     entity.getEmail(),
@@ -42,6 +43,7 @@ public class ProfileMapper implements Mapper<Profile, ProfileDTO> {
     @Override
     public Profile DTOToEntity(ProfileDTO dto) {
         Profile entity = new Profile();
+        entity.setId(dto.getId());
         entity.setFirstName(dto.getName());
         entity.setLastName(dto.getLastname());
         entity.setEmail(dto.getEmail());

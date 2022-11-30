@@ -1,9 +1,8 @@
 package server.database.entity;
 
-public class Course {
+public class Program {
     private String shortName;
     private String name;
-    private String programShortName;
 
     public String getShortName() {
         return shortName;
@@ -19,13 +18,5 @@ public class Course {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getProgramShortName() {
-        return programShortName;
-    }
-
-    public void setProgramShortName(String programShortName) {
-        this.programShortName = programShortName;
     }
 }

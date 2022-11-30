@@ -1,12 +1,16 @@
 package server.networking;
 
+import server.model.CourseManager;
+import server.model.CourseManagerImpl;
 import server.model.LoginManager;
-import server.model.LoginManagerImpl;
 import shared.networking.ClientCallback;
 import shared.networking.RMIServer;
 import shared.transferobject.dto.CourseDTO;
+import shared.transferobject.dto.FavoriteCourseDTO;
 import shared.transferobject.dto.ProfileDTO;
 import shared.transferobject.dto.UserDTO;
+import shared.transferobject.mapper.CourseMapper;
+import shared.transferobject.mapper.FavoriteCourseMapper;
 import shared.transferobject.mapper.ProfileMapper;
 import shared.transferobject.mapper.UserMapper;
 
@@ -19,15 +23,23 @@ import java.util.List;
 
 public class RMIServerImpl implements RMIServer {
 
-    private LoginManager loginManager;
     private UserMapper userMapper;
     private ProfileMapper profileMapper;
+    private CourseMapper courseMapper;
+    private FavoriteCourseMapper favoriteCourseMapper;
 
-    public RMIServerImpl(LoginManager loginManager) throws RemoteException {
+    private LoginManager loginManager;
+    private CourseManager courseManager;
+
+    public RMIServerImpl(LoginManager loginManager, CourseManager courseManager) throws RemoteException {
         UnicastRemoteObject.exportObject(this, 0);
         this.userMapper = UserMapper.getInstance();
         this.profileMapper = ProfileMapper.getInstance();
+        this.courseMapper = CourseMapper.getInstance();
+        this.favoriteCourseMapper = FavoriteCourseMapper.getInstance();
+
         this.loginManager = loginManager;
+        this.courseManager = courseManager;
     }
 
     public void startServer() {
@@ -40,33 +52,13 @@ public class RMIServerImpl implements RMIServer {
         }
     }
 
+    // PROFILE
     @Override
     public ProfileDTO login(UserDTO userDTO) {
         return profileMapper.entityToDTO(
                 loginManager.login(
                         userMapper.DTOToEntity(userDTO)
                 ));
-    }
-
-    // TODO: implement this method (Sprint 2)
-    @Override
-    public List<CourseDTO> getFavoriteCourses(int profileId) throws RemoteException {
-        return null;
-    }
-
-    @Override
-    public boolean removeFavoriteCourses(List<Integer> courseIds) throws RemoteException {
-        return false;
-    }
-
-    @Override
-    public List<CourseDTO> getAllCourses(String filter) throws RemoteException {
-        return null;
-    }
-
-    @Override
-    public boolean addFavoriteCourses(List<Integer> courseIds, int profileId) throws RemoteException {
-        return false;
     }
 
     @Override
@@ -78,10 +70,30 @@ public class RMIServerImpl implements RMIServer {
                 ));
     }
 
+    // COURSE
+    @Override
+    public List<CourseDTO> getFavoriteCourses(int profileId) throws RemoteException {
+        return courseMapper.allEntitiesToDTOs(courseManager.getFavoriteCourses(profileId));
+    }
+
+    @Override
+    public boolean removeFavoriteCourses(List<FavoriteCourseDTO> favoriteCourseDTOS) throws RemoteException {
+        return courseManager.removeFavoriteCourses(favoriteCourseMapper.allDTOsToEntities(favoriteCourseDTOS));
+    }
+
+    @Override
+    public List<CourseDTO> getAllCourses(String filter) throws RemoteException {
+        return courseMapper.allEntitiesToDTOs(courseManager.getAllCourses(filter));
+    }
+
+    @Override
+    public boolean addFavoriteCourses(List<String> courseNames, int profileId) throws RemoteException {
+        return courseManager.addFavoriteCourses(courseNames, profileId);
+    }
+
     @Override
     public void registerCallback(ClientCallback ccb) throws RemoteException {
-        loginManager.addListener("Message", evt -> {
-        });
+        loginManager.addListener("Message", evt -> {});
     }
 
 

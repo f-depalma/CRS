@@ -45,7 +45,10 @@ public class RMIClient implements Client, ClientCallback {
     @Override
     public ProfileDTO login(UserDTO userDTO) {
         try {
-            return server.login(userDTO);
+            ProfileDTO dto = server.login(userDTO);
+            List<CourseDTO> courses = server.getFavoriteCourses(dto.getId());
+            System.out.println(courses);
+            return dto;
         } catch (RemoteException e) {
             e.printStackTrace();
         }

@@ -14,13 +14,13 @@ public class ViewModelFactory {
 
     public LoginVM getLoginVM() {
         if (loginViewModel == null)
-            loginViewModel = new LoginVM(mf.getLoginVM());
+            loginViewModel = new LoginVM(mf.getLoginM());
         return loginViewModel;
     }
 
     public AccountVM getAccountVM() {
         return (accountViewModel = accountViewModel == null ?
-                new AccountVM(mf.getAccountVM()) :
+                new AccountVM(mf.getAccountM()) :
                 accountViewModel);
     }
 }

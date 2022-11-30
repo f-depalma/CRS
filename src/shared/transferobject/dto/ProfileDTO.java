@@ -8,18 +8,28 @@ import java.sql.Date;
 import java.util.Locale;
 
 public class ProfileDTO implements Serializable {
+    private int id;
     private String name;
     private String lastname;
     private String email;
     private String birthday;
     private UserType.TYPE type;
 
-    public ProfileDTO(String name, String lastname, String email, String birthday, String type) throws Exception {
+    public ProfileDTO(int id, String name, String lastname, String email, String birthday, String type) throws Exception {
+        this.id = id;
         this.name = name;
         this.lastname = lastname;
         this.email = Utils.checkEmail(email);
         this.birthday = birthday;
         this.type = UserType.getEnum(Utils.checkProfileType(type));
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -65,11 +75,12 @@ public class ProfileDTO implements Serializable {
     @Override
     public String toString() {
         return "ProfileDTO{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", email='" + email + '\'' +
-                ", birthday=" + birthday +
-                ", type='" + type.name().toLowerCase(Locale.ROOT) + '\'' +
+                ", birthday='" + birthday + '\'' +
+                ", type=" + type +
                 '}';
     }
 }

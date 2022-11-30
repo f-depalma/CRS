@@ -15,13 +15,13 @@ public class ModelFactory {
         this.cf = cf;
     }
 
-    public Login getLoginVM() {
+    public Login getLoginM() {
         if (login == null)
             login = new LoginManager(cf.getClient());
         return login;
     }
 
-    public Account getAccountVM() {
+    public Account getAccountM() {
         if (account == null)
             account = new AccountManager(cf.getClient());
         return account;
