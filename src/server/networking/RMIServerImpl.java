@@ -1,7 +1,6 @@
 package server.networking;
 
 import server.model.CourseManager;
-import server.model.CourseManagerImpl;
 import server.model.LoginManager;
 import shared.networking.ClientCallback;
 import shared.networking.RMIServer;

@@ -12,8 +12,9 @@ public class DBConnector {
     // Database configuration
     private static final String NAME = "postgres";
     private static final String USER = "postgres";
-    private static final String PASSWORD = "admin";
+    private static final String PASSWORD = "postgres";
     private static final String CURRENT_SCHEMA = "crs";
+    private static final String PORT = "5431";
 
     private static Deque<Connection> connections = new ArrayDeque<>();
 
@@ -41,7 +42,7 @@ public class DBConnector {
     }
 
     private static Connection createConnection() {
-        String url = "jdbc:postgresql://localhost:5432/" + NAME + "?currentSchema=" + CURRENT_SCHEMA;
+        String url = "jdbc:postgresql://localhost:" + PORT + "/" + NAME + "?currentSchema=" + CURRENT_SCHEMA;
         try {
             return new Connection(DriverManager.getConnection(url, USER, PASSWORD));
         } catch (SQLException ex) {

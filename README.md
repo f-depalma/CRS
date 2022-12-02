@@ -7,3 +7,13 @@ HOW TO CONNECT THE DB
 - User: postgres
 - Password: (the password you chose when installed Postgres
 - Database: postgres
+
+
+CREATE IMAGE
+- docker image build . -t crs_db:latest
+- docker tag my-image fdepalma95/crs_db:latest
+- docker push fdepalma95/crs_db:latest
+
+PULL IMAGE
+- docker pull fdepalma95/crs_db:latest
+- docker container run -d --rm -p 5431:5432 -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres --name crs_db fdepalma95/crs_db:latest

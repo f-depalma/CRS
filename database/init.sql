@@ -1,3 +1,16 @@
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+GRANT ALL PRIVILEGES ON DATABASE postgres to postgres;
+
 CREATE SCHEMA CRS;
 SET SCHEMA 'crs';
 
@@ -75,13 +88,10 @@ INSERT INTO favorite_course (profile_id, course_name)
 VALUES (1, 'SEP2');
 
 
-select *
-from app_user;
+-- select * from app_user;
 
-select *
-from profile;
+-- select * from profile;
 
-select *
-from course;
+-- select * from course;
 
-select * from course where short_name in ('SEP2');
+-- select * from course where short_name in ('SEP2');
