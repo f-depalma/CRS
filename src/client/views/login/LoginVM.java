@@ -21,7 +21,7 @@ public class LoginVM {
     }
 
 
-    public void logIn() {
+    public ProfileDTO logIn() {
         String username = inputUser.get();
         String password = inputPassword.get();
         if (checker(username) && checker(password)) {
@@ -29,8 +29,7 @@ public class LoginVM {
         } else {
             error.set("No matching username or password");
         }
-        ProfileDTO p = loginManager.login(username, password);
-        System.out.println(p);
+        return loginManager.login(username, password);
     }
 
     public StringProperty getInputUser() {

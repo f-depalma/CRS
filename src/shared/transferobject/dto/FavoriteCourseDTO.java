@@ -1,6 +1,8 @@
 package shared.transferobject.dto;
 
-public class FavoriteCourseDTO {
+import java.io.Serializable;
+
+public class FavoriteCourseDTO implements Serializable {
     private String courseShortName;
     private int profileId;
 

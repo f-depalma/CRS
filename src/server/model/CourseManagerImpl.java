@@ -6,6 +6,7 @@ import server.database.dao.CourseDao;
 import server.database.dao.FavoriteCourseDao;
 import server.database.entity.Course;
 import server.database.entity.FavoriteCourse;
+import shared.transferobject.dto.FavoriteCourseDTO;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -40,24 +41,19 @@ public class CourseManagerImpl implements CourseManager {
     }
 
     @Override
-    public List<Course> getAllCourses(String filter) {
+    public List<Course> getAllByNameNotInFavorite(String filter, int profileId) {
         CourseDao courseDao = CourseDao.getInstance();
-        return courseDao.getAllByName(filter);
+        return courseDao.getAllByNameNotInFavorite(filter, profileId);
     }
 
     @Override
-    public boolean addFavoriteCourses(List<String> courseNames, int profileId) {
+    public boolean addFavoriteCourses(List<FavoriteCourse> favoriteCourses) {
         FavoriteCourseDao favoriteCourseDao = FavoriteCourseDao.getInstance();
-        Connection con = DBConnector.getConnection();
         boolean ret = true;
 
-        for (String courseName : courseNames) {
-            FavoriteCourse f = new FavoriteCourse();
-            f.setCourseShortName(courseName);
-            f.setProfileId(profileId);
+        for (FavoriteCourse f : favoriteCourses) {
             ret &= favoriteCourseDao.save(f);
         }
-
         return ret;
     }
 

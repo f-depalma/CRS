@@ -11,10 +11,13 @@ public class QueriesBook {
                     "VALUES (?, ?, ?, ?, ?, ?)";
     // FAVORITE COURSE
     public static final String SELECT_COURSE_NAME_FROM_FAVORITE_COURSE_WHERE_PROFILE_ID = "select course_name from favorite_course where profile_id = ?";
-    public static final String DELETE_FROM_FAVORITE_COURSE_WHERE_SHORT_NAME_AND_PROFILE_ID = "delete from favorite_course where short_name = ? and profile_id = ?";
+    public static final String DELETE_FROM_FAVORITE_COURSE_WHERE_SHORT_NAME_AND_PROFILE_ID = "delete from favorite_course where course_name = ? and profile_id = ?";
     public static final String INSERT_INTO_FAVORITE_COURSE_ALL_VALUES = "insert into favorite_course(course_name, profile_id) values (?, ?)";
     // COURSE
     public static final String SELECT_FROM_COURSE_WHERE_SHORT_NAME_IN = "select * from course where short_name = ANY(?)";
-    public static final String SELECT_FROM_COURSE_WHERE_NAME_LIKE = "select * from course where name like '%?%'";
+    public static final String SELECT_FROM_COURSE_WHERE_NAME_LIKE_NOT_IN_FAVORITE =
+            "SELECT * FROM course where short_name not in" +
+            "     (select course_name from favorite_course where profile_id = ?)" +
+            "and name like ?";
 
 }

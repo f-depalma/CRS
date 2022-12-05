@@ -1,5 +1,6 @@
 package client.views.login;
 
+import client.core.Storage;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.views.ViewController;
@@ -9,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
+import shared.transferobject.dto.ProfileDTO;
 
 import java.io.IOException;
 
@@ -43,7 +45,11 @@ public class LoginCourseController implements ViewController {
     }
 
     public void onLoginButton(ActionEvent event) {
-        loginVM.logIn();
+        ProfileDTO p = loginVM.logIn();
+        if (p != null) {
+            Storage.setProfile(p);
+            viewHandler.openFavoriteCoursesScene();
+        }
     }
 
     public void onCreateAccountButton(ActionEvent event) throws IOException {

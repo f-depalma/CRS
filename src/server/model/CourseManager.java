@@ -2,6 +2,7 @@ package server.model;
 
 import server.database.entity.Course;
 import server.database.entity.FavoriteCourse;
+import shared.transferobject.dto.FavoriteCourseDTO;
 import shared.util.Subject;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public interface CourseManager extends Subject {
 
     boolean removeFavoriteCourses(List<FavoriteCourse> favoriteCourses);
 
-    List<Course> getAllCourses(String filter);
+    List<Course> getAllByNameNotInFavorite(String filter, int profileId);
 
-    boolean addFavoriteCourses(List<String> courseNames, int profileId);
+    boolean addFavoriteCourses(List<FavoriteCourse> favoriteCourseDTOS);
 }

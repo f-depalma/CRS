@@ -31,7 +31,7 @@ public class AccountVM {
         birthday = new SimpleStringProperty();
     }
 
-    public void createAccount() {
+    public ProfileDTO createAccount() {
         String fistName = fName.get();
         String lastName = lName.get();
         String email = emailField.get();
@@ -53,15 +53,14 @@ public class AccountVM {
                 ProfileDTO profileDTO = new ProfileDTO(-1, fistName, lastName, email, birthday,
                         isStudent ? "S" : isTeacher ? "T" : "");
                 ProfileDTO p = accountManager.createAccount(userDTO, profileDTO);
-                if (p != null) {
-                    System.out.println(p);
-                }
+                return p;
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } else {
             error.set("Make sure to fill all the fields");
         }
+        return null;
     }
 
     public StringProperty getFName() {

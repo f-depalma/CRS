@@ -20,8 +20,8 @@ public interface RMIServer extends Remote {
 
     boolean removeFavoriteCourses(List<FavoriteCourseDTO> favoriteCourseDTOS) throws RemoteException;
 
-    List<CourseDTO> getAllCourses(String filter) throws RemoteException;
+    List<CourseDTO> getAllByNameNotInFavorite(String filter, int profileId) throws RemoteException;
 
-    boolean addFavoriteCourses(List<String> courseNames, int profileId) throws RemoteException;
+    boolean addFavoriteCourses(List<FavoriteCourseDTO> favoriteCourseDTOS) throws RemoteException;
 
 }

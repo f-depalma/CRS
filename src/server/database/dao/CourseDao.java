@@ -43,12 +43,15 @@ public class CourseDao implements Dao<Course> {
         return null;
     }
 
-    public List<Course> getAllByName(String filter) {
+    public List<Course> getAllByNameNotInFavorite(String filter, int profileId) {
         Connection con = DBConnector.getConnection();
         List<Course> courses = new ArrayList<>();
 
         try {
-            PreparedStatement statement = con.prepareStatement(QueriesBook.SELECT_FROM_COURSE_WHERE_NAME_LIKE);
+            PreparedStatement statement = con.prepareStatement(QueriesBook.SELECT_FROM_COURSE_WHERE_NAME_LIKE_NOT_IN_FAVORITE);
+            statement.setInt(1, profileId);
+            statement.setString(2, "%" + (filter == null? "": filter) + "%");
+            System.out.println(statement);
             ResultSet res = statement.executeQuery();
 
             while (res.next()) {
@@ -58,7 +61,7 @@ public class CourseDao implements Dao<Course> {
             e.printStackTrace();
         }
         con.close();
-        return null;
+        return courses;
     }
 
     @Override

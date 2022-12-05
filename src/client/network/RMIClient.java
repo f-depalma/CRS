@@ -3,6 +3,7 @@ package client.network;
 import shared.networking.ClientCallback;
 import shared.networking.RMIServer;
 import shared.transferobject.dto.CourseDTO;
+import shared.transferobject.dto.FavoriteCourseDTO;
 import shared.transferobject.dto.ProfileDTO;
 import shared.transferobject.dto.UserDTO;
 
@@ -68,21 +69,41 @@ public class RMIClient implements Client, ClientCallback {
     // TODO: implements this methods (Sprint 2)
     @Override
     public List<CourseDTO> getFavoriteCourses(int profileId) {
+        try {
+            return server.getFavoriteCourses(profileId);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
     @Override
-    public boolean removeFavoriteCourses(List<Integer> courseIds) {
+    public boolean removeFavoriteCourses(List<FavoriteCourseDTO> favoriteCourseDTOS) {
+        try {
+            return server.removeFavoriteCourses(favoriteCourseDTOS);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 
     @Override
-    public List<CourseDTO> getAllCourses(String filter) {
+    public List<CourseDTO> getAllCourses(String filter, int profileId) {
+        try {
+            return server.getAllByNameNotInFavorite(filter, profileId);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
     @Override
-    public boolean addFavoriteCourses(List<Integer> courseIds, int profileId) {
+    public boolean addFavoriteCourses(List<FavoriteCourseDTO> favoriteCourseDTOS) {
+        try {
+            return server.addFavoriteCourses(favoriteCourseDTOS);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 

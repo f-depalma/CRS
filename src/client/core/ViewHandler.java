@@ -13,6 +13,8 @@ public class ViewHandler {
 
     private Scene loginScene;
     private Scene accountScene;
+    private Scene favoriteCourseScene;
+    private Scene courseScene;
 
     private Stage stage;
 
@@ -26,8 +28,7 @@ public class ViewHandler {
         openLoginScene();
     }
 
-    public void openLoginScene()
-    {
+    public void openLoginScene() {
         if (loginScene == null) {
             try {
                 Parent root = loadFXML("../../client/views/login/loginCourse.fxml");
@@ -43,8 +44,7 @@ public class ViewHandler {
         stage.show();
     }
 
-    public void openAccountScene()
-    {
+    public void openAccountScene() {
         if (accountScene == null) {
             try {
                 Parent root = loadFXML("../../client/views/account/accountCourse.fxml");
@@ -57,6 +57,36 @@ public class ViewHandler {
             }
         }
         stage.setScene(accountScene);
+        stage.show();
+    }
+
+    public void openFavoriteCoursesScene() {
+        if (favoriteCourseScene == null) {
+            try {
+                Parent root = loadFXML("../../client/views/favoritecourses/favoriteCourses.fxml");
+                favoriteCourseScene = new Scene(root);
+                stage.setTitle("Favorite Courses");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        vmf.getFavoriteCoursesVM().getFavoriteCourses();
+        stage.setScene(favoriteCourseScene);
+        stage.show();
+    }
+
+    public void openCoursesScene() {
+        if (courseScene == null) {
+            try {
+                Parent root = loadFXML("../../client/views/courses/courses.fxml");
+                courseScene = new Scene(root);
+                stage.setTitle("All Courses");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        vmf.getCoursesVM().getAllCourses("");
+        stage.setScene(courseScene);
         stage.show();
     }
 

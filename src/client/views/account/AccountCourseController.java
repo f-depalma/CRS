@@ -1,11 +1,13 @@
 package client.views.account;
 
+import client.core.Storage;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.views.ViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import shared.transferobject.dto.ProfileDTO;
 
 import java.io.IOException;
 
@@ -64,6 +66,10 @@ public class AccountCourseController implements ViewController {
     }
 
     public void onCreateButton(ActionEvent event) {
-        accountVM.createAccount();
+        ProfileDTO p = accountVM.createAccount();
+        if (p != null) {
+            Storage.setProfile(p);
+            viewHandler.openFavoriteCoursesScene();
+        }
     }
 }

@@ -5,30 +5,30 @@ import client.core.ViewModelFactory;
 import client.views.ViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import server.database.entity.Course;
+import javafx.scene.control.TableView;
 
-public class FavoriteCoursesController implements ViewController
-{
+public class FavoriteCoursesController implements ViewController {
     @FXML
-    private ListView<Course> listView;
-    @FXML
-    private Button addFCButton;
-    @FXML
-    private Button removeFCButton;
+    private TableView tableView;
+
+    private ViewHandler vh;
+    private FavoriteCoursesVM favoriteCoursesVM;
+
+    @Override
+    public void init(ViewHandler vh, ViewModelFactory vmf) {
+        this.vh = vh;
+        this.favoriteCoursesVM = vmf.getFavoriteCoursesVM();
+        tableView.itemsProperty().bindBidirectional(favoriteCoursesVM.getListProperty());
+    }
 
     @FXML
     void onFCAddButton(ActionEvent event) {
-      //TODO: Open Courses view
+        vh.openCoursesScene();
     }
 
     @FXML
     void onRemoveFCButton(ActionEvent event) {
-      //TODO:
+        this.favoriteCoursesVM.removeFavoriteCourses(tableView.getSelectionModel().getSelectedItems());
     }
-  @Override public void init(ViewHandler vh, ViewModelFactory vmf)
-  {
-    //TODO:
-  }
+
 }

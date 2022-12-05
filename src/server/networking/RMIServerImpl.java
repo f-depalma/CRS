@@ -81,13 +81,13 @@ public class RMIServerImpl implements RMIServer {
     }
 
     @Override
-    public List<CourseDTO> getAllCourses(String filter) throws RemoteException {
-        return courseMapper.allEntitiesToDTOs(courseManager.getAllCourses(filter));
+    public List<CourseDTO> getAllByNameNotInFavorite(String filter, int profileId) throws RemoteException {
+        return courseMapper.allEntitiesToDTOs(courseManager.getAllByNameNotInFavorite(filter, profileId));
     }
 
     @Override
-    public boolean addFavoriteCourses(List<String> courseNames, int profileId) throws RemoteException {
-        return courseManager.addFavoriteCourses(courseNames, profileId);
+    public boolean addFavoriteCourses(List<FavoriteCourseDTO> favoriteCourseDTOS) throws RemoteException {
+        return courseManager.addFavoriteCourses(favoriteCourseMapper.allDTOsToEntities(favoriteCourseDTOS));
     }
 
     @Override
