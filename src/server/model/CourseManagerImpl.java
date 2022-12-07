@@ -13,8 +13,6 @@ import java.beans.PropertyChangeSupport;
 import java.util.List;
 
 public class CourseManagerImpl implements CourseManager {
-
-    // TODO: implement those methods (Sprint 2) + singleton
     private PropertyChangeSupport support;
 
     public CourseManagerImpl() {

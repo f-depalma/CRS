@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class ProgramDao implements Dao<Program> {
-    // TODO: implements those methods (Sprint 2) + singleton
     private static ProgramDao instance = null;
 
     private ProgramDao() {

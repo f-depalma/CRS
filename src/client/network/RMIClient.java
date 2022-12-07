@@ -66,7 +66,6 @@ public class RMIClient implements Client, ClientCallback {
         return null;
     }
 
-    // TODO: implements this methods (Sprint 2)
     @Override
     public List<CourseDTO> getFavoriteCourses(int profileId) {
         try {

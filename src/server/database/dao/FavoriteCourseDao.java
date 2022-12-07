@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class FavoriteCourseDao implements Dao<FavoriteCourse> {
-    // TODO: implements those methods (Sprint 2) + singleton
     private static FavoriteCourseDao instance = null;
 
     private FavoriteCourseDao() {

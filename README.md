@@ -17,3 +17,9 @@ CREATE IMAGE AND PUSH TO THE REPOSITORY
 PULL IMAGE AND START DB
 - docker pull fdepalma95/crs_db:latest
 - docker container run -d --rm -p 5431:5432 -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres --name crs_db fdepalma95/crs_db:latest
+
+OTHER DOCKER COMANDS
+- docker image ls
+- docker image remove my_image
+- docker ps -a
+- docker stop my_container

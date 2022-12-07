@@ -12,7 +12,6 @@ import java.sql.SQLException;
 import java.util.*;
 
 public class CourseDao implements Dao<Course> {
-    // TODO: implements those methods (Sprint 2) + singleton
     private static CourseDao instance = null;
 
     private CourseDao() {
