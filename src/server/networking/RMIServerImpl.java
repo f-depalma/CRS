@@ -49,11 +49,11 @@ public class RMIServerImpl implements RMIServer {
         try {
             registry = LocateRegistry.createRegistry(1099);
             registry.bind("Server", this);
+            System.out.println("Server Started");
         } catch (RemoteException | AlreadyBoundException e) {
             e.printStackTrace();
         }
     }
-
     // PROFILE
     @Override
     public ProfileDTO login(UserDTO userDTO) {

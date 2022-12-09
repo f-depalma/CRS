@@ -133,8 +133,52 @@ INSERT INTO program(short_name, name)
 VALUES ('IT', 'Software Technology Engineering');
 
 INSERT INTO course (short_name, name, program_name, description, ects, requirements)
-VALUES ('SEP2', 'Semester Project 2', 'IT', '...', 10, '...'),
-       ('SDJ2', 'Software Development with UML and Java 2', 'IT', '...', 10, '...');
+VALUES ('SDJ1', 'Software Development with UML and Java 1', 'IT', '...', 10, '...'),
+       ('SEP1', 'Semester Project', 'IT', '...', 10, '...'),
+       ('DMA1', 'Discrete Mathematics and Algorithms', 'IT', '...', 5, '...'),
+       ('RWD1', 'Responsive Web Design', 'IT', '...', 5, '...'),
+       ('SEP2', 'Semester Project 2', 'IT', '...', 10, '...'),
+       ('SDJ2', 'Software Development with UML and Java 2', 'IT', '...', 10, '...'),
+       ('SWE1', 'Software Engineering', 'IT', '...', 5, '...'),
+       ('DBS1', 'Database Systems', 'IT', '...', 5, '...'),
+       ('SDJ3', 'Software Development with UML and Java', 'IT', '...', 5, '...'),
+       ('CAO1', 'Computer Architecture and Organization', 'IT', '...', 5, '...'),
+       ('DNP1', '.NET Programming', 'IT', '...', 5, '...'),
+       ('NES1', 'Networking and Security', 'IT', '...', 5, '...'),
+       ('SEP3', 'Semester Project 3', 'IT', '...', 10, '...'),
+       ('AND1', 'Semester Project 3', 'IT', '...', 5, '...'),
+       ('ESW1', 'Embedded Software', 'IT', '...', 5, '...'),
+       ('DAI1', 'Data Analytics Infrastructure', 'IT', '...', 5, '...'),
+       ('DOC1', 'DevOps and Cloud', 'IT', '...', 5, '...'),
+       ('SEP4', 'Semester Project 4', 'IT', '...', 10, '...'),
+       ('ADS1', 'Algorithms and Data Structures', 'IT', '...', 5, '...'),
+       ('BPR1', 'Bachelor Project Preparation', 'IT', '...', 5, '...'),
+       ('SEP6', 'Semester Project 6', 'IT', '...', 10, '...'),
+       ('BPR2', 'Bachelor Project', 'IT', '...', 15, '...'),
+       --Elective Subjects
+       ('PCL1', 'Programming Concepts and Languages', 'IT', '...', 5, '...'),
+       ('ALI1', 'Applied Linear Algebra', 'IT', '...', 5, '...'),
+       ('PME1', 'Process Management for Software Engineering', 'IT', '...', 5, '...'),
+       ('CMC1', 'Compiler Construction', 'IT', '...', 5, '...'),
+       ('ERP1', 'ERP Systems SAP ABAP/4 Programming', 'IT', '...', 5, '...'),
+       ('DNP2', 'Advanced .NET Programming', 'IT', '...', 5, '...'),
+       ('SWA1', 'Single-page Web Applications', 'IT', '...', 5, '...'),
+       ('IDX1', 'Interaction Design', 'IT', '...', 5, '...'),
+       ('GMD1', 'Game Development ', 'IT', '...', 5, '...'),
+       ('DIM1', 'Digital Multi Media', 'IT', '...', 5, '...'),
+       ('MIX1', 'Mixed Reality', 'IT', '...', 5, '...'),
+       ('BEL1', 'Basic Electronics', 'IT', '...', 5, '...'),
+       ('DSP1', 'Digital Signal Processing', 'IT', '...', 5, '...'),
+       ('EOS1', 'Embedded Operating Systems', 'IT', '...', 5, '...'),
+       ('RTP1', 'Real-Time Programming', 'IT', '...', 5, '...'),
+       ('LWA1', 'Internet-of-Things WAN’s', 'IT', '...', 5, '...'),
+       ('HWP1', 'Hardware Oriented Programming', 'IT', '...', 5, '...'),
+       ('MAL1', 'Machine Learning', 'IT', '...', 5, '...'),
+       ('SMP1', 'Stochastic Processes and Modelling', 'IT', '...', 5, '...'),
+       ('BUI1', 'Business Intelligence', 'IT', '...', 5, '...'),
+       ('NSQ1', 'No-SQL versus relational databases', 'IT', '...', 5, '...');
+
+       ;
 
 INSERT INTO teacher_of_course(profile_id, course_name)
 VALUES ((select id from app_user where username = 'prof' and password = 'profprof'), 'SEP2'),
