@@ -1,6 +1,5 @@
 package client.network;
 
-import shared.networking.ClientCallback;
 import shared.networking.RMIServer;
 import shared.transferobject.dto.CourseDTO;
 import shared.transferobject.dto.FavoriteCourseDTO;
@@ -8,6 +7,7 @@ import shared.transferobject.dto.ProfileDTO;
 import shared.transferobject.dto.UserDTO;
 
 import java.beans.PropertyChangeSupport;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.rmi.registry.LocateRegistry;
@@ -16,7 +16,7 @@ import java.rmi.NotBoundException;
 import java.beans.PropertyChangeListener;
 import java.util.List;
 
-public class RMIClient implements Client, ClientCallback {
+public class RMIClient implements Client, Remote {
 
     private PropertyChangeSupport support;
     private String name;
@@ -37,7 +37,6 @@ public class RMIClient implements Client, ClientCallback {
         try {
             registry = LocateRegistry.getRegistry("localhost", 1099);
             server = (RMIServer) registry.lookup("Server");
-            server.registerCallback( this);
         } catch (RemoteException | NotBoundException e) {
             e.printStackTrace();
         }

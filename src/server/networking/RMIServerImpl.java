@@ -2,16 +2,10 @@ package server.networking;
 
 import server.model.CourseManager;
 import server.model.LoginManager;
-import shared.networking.ClientCallback;
+import server.model.ReviewManager;
 import shared.networking.RMIServer;
-import shared.transferobject.dto.CourseDTO;
-import shared.transferobject.dto.FavoriteCourseDTO;
-import shared.transferobject.dto.ProfileDTO;
-import shared.transferobject.dto.UserDTO;
-import shared.transferobject.mapper.CourseMapper;
-import shared.transferobject.mapper.FavoriteCourseMapper;
-import shared.transferobject.mapper.ProfileMapper;
-import shared.transferobject.mapper.UserMapper;
+import shared.transferobject.dto.*;
+import shared.transferobject.mapper.*;
 
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
@@ -26,19 +20,28 @@ public class RMIServerImpl implements RMIServer {
     private ProfileMapper profileMapper;
     private CourseMapper courseMapper;
     private FavoriteCourseMapper favoriteCourseMapper;
+    private ReviewMapper reviewMapper;
 
     private LoginManager loginManager;
     private CourseManager courseManager;
+    private ReviewManager reviewManager;
 
-    public RMIServerImpl(LoginManager loginManager, CourseManager courseManager) throws RemoteException {
+    public RMIServerImpl(
+            LoginManager loginManager,
+            CourseManager courseManager,
+            ReviewManager reviewManager
+    ) throws RemoteException {
+
         UnicastRemoteObject.exportObject(this, 0);
         this.userMapper = UserMapper.getInstance();
         this.profileMapper = ProfileMapper.getInstance();
         this.courseMapper = CourseMapper.getInstance();
         this.favoriteCourseMapper = FavoriteCourseMapper.getInstance();
+        this.reviewMapper = ReviewMapper.getInstance();
 
         this.loginManager = loginManager;
         this.courseManager = courseManager;
+        this.reviewManager = reviewManager;
     }
 
     public void startServer() {
@@ -90,10 +93,19 @@ public class RMIServerImpl implements RMIServer {
         return courseManager.addFavoriteCourses(favoriteCourseMapper.allDTOsToEntities(favoriteCourseDTOS));
     }
 
+    // REVIEW
     @Override
-    public void registerCallback(ClientCallback ccb) throws RemoteException {
-        loginManager.addListener("Message", evt -> {});
+    public List<ReviewDTO> getAllReviews(String courseName) throws RemoteException {
+        return reviewMapper.allEntitiesToDTOs(reviewManager.getAllReviews(courseName));
     }
 
+    @Override
+    public boolean saveReview(ReviewDTO reviewDTO) throws RemoteException {
+        return reviewManager.saveReview(reviewMapper.DTOToEntity(reviewDTO));
+    }
 
+    @Override
+    public boolean updateReview(ReviewDTO reviewDTO) throws RemoteException {
+        return reviewManager.updateReview(reviewMapper.DTOToEntity(reviewDTO));
+    }
 }

@@ -1,7 +1,7 @@
 package client.views.login;
 
-import client.core.Storage;
-import client.core.ViewHandler;
+import client.model.Page;
+import client.model.Storage;
 import client.core.ViewModelFactory;
 import client.views.ViewController;
 import javafx.event.ActionEvent;
@@ -32,12 +32,11 @@ public class LoginCourseController implements ViewController {
     public Label errorLabel;
 
     private LoginVM loginVM;
-    private ViewHandler viewHandler;
+    private Storage storage = Storage.get();
 
     @Override
-    public void init(ViewHandler vh, ViewModelFactory vmf) {
+    public void init(ViewModelFactory vmf) {
         this.loginVM = vmf.getLoginVM();
-        this.viewHandler = vh;
 
         usernameField.textProperty().bindBidirectional(loginVM.getInputUser());
         passwordField.textProperty().bindBidirectional(loginVM.getInputPassword());
@@ -47,12 +46,12 @@ public class LoginCourseController implements ViewController {
     public void onLoginButton(ActionEvent event) {
         ProfileDTO p = loginVM.logIn();
         if (p != null) {
-            Storage.setProfile(p);
-            viewHandler.openFavoriteCoursesScene();
+            storage.setProfile(p);
+            storage.goTo(Page.FAVORITE_COURSES);
         }
     }
 
     public void onCreateAccountButton(ActionEvent event) throws IOException {
-        viewHandler.openAccountScene();
+        storage.goTo(Page.NEW_ACCOUNT);
     }
 }

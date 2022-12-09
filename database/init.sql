@@ -14,13 +14,6 @@ GRANT ALL PRIVILEGES ON DATABASE postgres to postgres;
 CREATE SCHEMA CRS;
 SET SCHEMA 'crs';
 
--- drop table profile;
--- drop table app_user;
--- drop table favorite_course;
--- drop table course;
--- drop table program;
-
-
 CREATE TABLE app_user
 (
     id       BIGSERIAL                                    NOT NULL,
@@ -152,12 +145,3 @@ VALUES ('...', 2, '10-10-2022', (select id from app_user where username = 'stud'
 
 INSERT INTO favorite_course (profile_id, course_name)
 VALUES (1, 'SEP2');
-
-
--- select * from app_user;
-
--- select * from profile;
-
--- select * from course;
-
--- select * from course where short_name in ('SEP2');

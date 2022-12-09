@@ -1,6 +1,6 @@
 package client.views.courses;
 
-import client.core.Storage;
+import client.model.Storage;
 import client.model.courses.Courses;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CoursesVM {
-
+    private Storage storage = Storage.get();
     private Courses coursesManager;
     private ObjectProperty<ObservableList<CourseDTO>> list;
     private StringProperty filter;
@@ -42,14 +42,14 @@ public class CoursesVM {
     public void getAllCourses(String filter) {
         list.set(
                 FXCollections.observableArrayList(
-                        coursesManager.getAllCourses(filter, Storage.getProfile().getId())
+                        coursesManager.getAllCourses(filter, storage.getProfile().getId())
                 ));
     }
 
     public boolean addFavoriteCourses(List<CourseDTO> courses) {
         List<FavoriteCourseDTO> favoriteCourseDTOS = new ArrayList<>();
         for(CourseDTO c : courses) {
-            FavoriteCourseDTO f = new FavoriteCourseDTO(c.getShortName(), Storage.getProfile().getId());
+            FavoriteCourseDTO f = new FavoriteCourseDTO(c.getShortName(), storage.getProfile().getId());
             favoriteCourseDTOS.add(f);
         }
         return coursesManager.addFavoriteCourses(favoriteCourseDTOS);

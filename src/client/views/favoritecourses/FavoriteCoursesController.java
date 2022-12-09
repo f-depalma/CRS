@@ -1,7 +1,8 @@
 package client.views.favoritecourses;
 
-import client.core.ViewHandler;
 import client.core.ViewModelFactory;
+import client.model.Page;
+import client.model.Storage;
 import client.views.ViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,19 +12,18 @@ public class FavoriteCoursesController implements ViewController {
     @FXML
     private TableView tableView;
 
-    private ViewHandler vh;
     private FavoriteCoursesVM favoriteCoursesVM;
+    private Storage storage = Storage.get();
 
     @Override
-    public void init(ViewHandler vh, ViewModelFactory vmf) {
-        this.vh = vh;
+    public void init(ViewModelFactory vmf) {
         this.favoriteCoursesVM = vmf.getFavoriteCoursesVM();
         tableView.itemsProperty().bindBidirectional(favoriteCoursesVM.getListProperty());
     }
 
     @FXML
     void onFCAddButton(ActionEvent event) {
-        vh.openCoursesScene();
+        storage.goTo(Page.ALL_COURSES);
     }
 
     @FXML

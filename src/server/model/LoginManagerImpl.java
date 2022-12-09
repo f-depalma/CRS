@@ -5,7 +5,6 @@ import server.database.dao.UserDao;
 import server.database.entity.Profile;
 import server.database.entity.User;
 
-import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.Optional;
 
@@ -54,15 +53,5 @@ public class LoginManagerImpl implements LoginManager {
             }
         }
         return null;
-    }
-
-    @Override
-    public void addListener(String eventName, PropertyChangeListener listener) {
-        support.addPropertyChangeListener(eventName, listener);
-    }
-
-    @Override
-    public void removeListener(String eventName, PropertyChangeListener listener) {
-        support.removePropertyChangeListener(eventName, listener);
     }
 }

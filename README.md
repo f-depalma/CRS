@@ -1,6 +1,5 @@
 HOW TO CONNECT THE DB
 
-- open the file init.sql in DataGrip
 - Press on configure data source
 - Name: postgres@localhost
 - Port: 5431

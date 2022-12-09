@@ -1,5 +1,7 @@
 package shared.util;
 
+import java.sql.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class Utils {
@@ -22,5 +24,17 @@ public class Utils {
                     return email;
         }
         throw new Exception("Profile email format is incorrect");
+    }
+
+    public static Date stringToDate(String date) {
+        java.util.Date parsed;
+        Date sqlDate = null;
+        try {
+            parsed = DATE_FORMAT.parse(date);
+            sqlDate = new java.sql.Date(parsed.getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return sqlDate;
     }
 }

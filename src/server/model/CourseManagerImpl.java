@@ -1,14 +1,10 @@
 package server.model;
 
-import server.database.Connection;
-import server.database.DBConnector;
 import server.database.dao.CourseDao;
 import server.database.dao.FavoriteCourseDao;
 import server.database.entity.Course;
 import server.database.entity.FavoriteCourse;
-import shared.transferobject.dto.FavoriteCourseDTO;
 
-import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.List;
 
@@ -53,15 +49,5 @@ public class CourseManagerImpl implements CourseManager {
             ret &= favoriteCourseDao.save(f);
         }
         return ret;
-    }
-
-    @Override
-    public void addListener(String eventName, PropertyChangeListener listener) {
-        support.addPropertyChangeListener(eventName, listener);
-    }
-
-    @Override
-    public void removeListener(String eventName, PropertyChangeListener listener) {
-        support.removePropertyChangeListener(eventName, listener);
     }
 }

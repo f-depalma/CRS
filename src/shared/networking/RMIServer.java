@@ -1,9 +1,6 @@
 package shared.networking;
 
-import shared.transferobject.dto.CourseDTO;
-import shared.transferobject.dto.FavoriteCourseDTO;
-import shared.transferobject.dto.ProfileDTO;
-import shared.transferobject.dto.UserDTO;
+import shared.transferobject.dto.*;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -14,8 +11,6 @@ public interface RMIServer extends Remote {
 
     ProfileDTO createAccount(UserDTO userDTO, ProfileDTO profileDTO) throws RemoteException;
 
-    void registerCallback(ClientCallback ccb) throws RemoteException;
-
     List<CourseDTO> getFavoriteCourses(int profileId) throws RemoteException;
 
     boolean removeFavoriteCourses(List<FavoriteCourseDTO> favoriteCourseDTOS) throws RemoteException;
@@ -24,4 +19,9 @@ public interface RMIServer extends Remote {
 
     boolean addFavoriteCourses(List<FavoriteCourseDTO> favoriteCourseDTOS) throws RemoteException;
 
+    List<ReviewDTO> getAllReviews(String courseName) throws RemoteException;
+
+    boolean saveReview(ReviewDTO reviewDTO) throws RemoteException;
+
+    boolean updateReview(ReviewDTO reviewDTO) throws RemoteException;
 }

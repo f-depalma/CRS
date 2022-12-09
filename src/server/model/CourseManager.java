@@ -2,12 +2,10 @@ package server.model;
 
 import server.database.entity.Course;
 import server.database.entity.FavoriteCourse;
-import shared.transferobject.dto.FavoriteCourseDTO;
-import shared.util.Subject;
 
 import java.util.List;
 
-public interface CourseManager extends Subject {
+public interface CourseManager {
 
     List<Course> getFavoriteCourses(int profileId);
 

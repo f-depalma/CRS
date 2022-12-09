@@ -1,11 +1,10 @@
 package client.views.favoritecourses;
 
-import client.core.Storage;
+import client.model.Storage;
 import client.model.favoritecourses.FavoriteCourses;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import shared.transferobject.dto.CourseDTO;
@@ -19,6 +18,7 @@ public class FavoriteCoursesVM {
     private ObjectProperty<ObservableList<CourseDTO>> list;
 
     private FavoriteCourses favoriteCoursesManager;
+    private Storage storage = Storage.get();
 
     public FavoriteCoursesVM(FavoriteCourses favoriteCourses) {
         list = new SimpleObjectProperty<>();
@@ -29,7 +29,7 @@ public class FavoriteCoursesVM {
     public void removeFavoriteCourses(List<CourseDTO> courseDTOS) {
         List<FavoriteCourseDTO> favoriteCourseDTOS = new ArrayList<>();
         for (CourseDTO c : courseDTOS) {
-            FavoriteCourseDTO favoriteCourseDTO = new FavoriteCourseDTO(c.getShortName(), Storage.getProfile().getId());
+            FavoriteCourseDTO favoriteCourseDTO = new FavoriteCourseDTO(c.getShortName(), storage.getProfile().getId());
             favoriteCourseDTOS.add(favoriteCourseDTO);
         }
 
@@ -38,10 +38,9 @@ public class FavoriteCoursesVM {
     }
 
     public void getFavoriteCourses() {
-        System.out.println("load favorite course");
         list.set(
                 FXCollections.observableArrayList(
-                        favoriteCoursesManager.getFavoriteCourses(Storage.getProfile().getId())
+                        favoriteCoursesManager.getFavoriteCourses(storage.getProfile().getId())
                 ));
     }
 

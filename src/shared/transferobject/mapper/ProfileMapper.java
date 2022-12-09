@@ -5,8 +5,6 @@ import shared.transferobject.dto.ProfileDTO;
 import shared.util.UserType;
 import shared.util.Utils;
 
-import java.sql.Date;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +23,6 @@ public class ProfileMapper implements Mapper<Profile, ProfileDTO> {
     @Override
     public ProfileDTO entityToDTO(Profile entity) {
         try {
-
             return new ProfileDTO(
                     entity.getId(),
                     entity.getFirstName(),
@@ -47,16 +44,7 @@ public class ProfileMapper implements Mapper<Profile, ProfileDTO> {
         entity.setFirstName(dto.getName());
         entity.setLastName(dto.getLastname());
         entity.setEmail(dto.getEmail());
-        java.util.Date parsed = null;
-        Date sqlDate = null;
-        try {
-            parsed = Utils.DATE_FORMAT.parse(dto.getBirthday());
-            sqlDate = new java.sql.Date(parsed.getTime());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        entity.setBirthday(sqlDate);
+        entity.setBirthday(Utils.stringToDate(dto.getBirthday()));
         entity.setType(UserType.getValue(dto.getType()));
         return entity;
     }

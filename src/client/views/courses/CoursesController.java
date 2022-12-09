@@ -1,7 +1,7 @@
 package client.views.courses;
 
-import client.core.ViewHandler;
 import client.core.ViewModelFactory;
+import client.model.Storage;
 import client.views.ViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,12 +16,11 @@ public class CoursesController implements ViewController {
     @FXML
     TextField filter;
 
-    private ViewHandler vh;
     private CoursesVM coursesVM;
+    private Storage storage = Storage.get();
 
     @Override
-    public void init(ViewHandler vh, ViewModelFactory vmf) {
-        this.vh = vh;
+    public void init(ViewModelFactory vmf) {
         this.coursesVM = vmf.getCoursesVM();
         tableView.itemsProperty().bindBidirectional(coursesVM.getListProperty());
         filter.textProperty().bindBidirectional(coursesVM.getFilter());
@@ -29,13 +28,12 @@ public class CoursesController implements ViewController {
 
     @FXML
     public void onBack(ActionEvent actionEvent) {
-        vh.openFavoriteCoursesScene();
+        storage.goBack();
     }
 
     public void onAddToFavoritesButton(ActionEvent actionEvent) {
         if (coursesVM.addFavoriteCourses(tableView.getSelectionModel().getSelectedItems())) {
-            vh.openFavoriteCoursesScene();
-            System.out.println("is true");
+            storage.goBack();
         }
     }
 }

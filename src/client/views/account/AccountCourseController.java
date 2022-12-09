@@ -1,7 +1,7 @@
 package client.views.account;
 
-import client.core.Storage;
-import client.core.ViewHandler;
+import client.model.Page;
+import client.model.Storage;
 import client.core.ViewModelFactory;
 import client.views.ViewController;
 import javafx.event.ActionEvent;
@@ -43,12 +43,11 @@ public class AccountCourseController implements ViewController {
     @FXML
     public DatePicker birthday;
 
-    private ViewHandler viewHandler;
     private AccountVM accountVM;
+    private Storage storage = Storage.get();
 
     @Override
-    public void init(ViewHandler vh, ViewModelFactory vmf) {
-        this.viewHandler = vh;
+    public void init(ViewModelFactory vmf) {
         this.accountVM = vmf.getAccountVM();
 
         firstNameField.textProperty().bindBidirectional(accountVM.getFName());
@@ -62,14 +61,14 @@ public class AccountCourseController implements ViewController {
     }
 
     public void onBackButton(ActionEvent event) throws IOException {
-        viewHandler.openLoginScene();
+        storage.goBack();
     }
 
     public void onCreateButton(ActionEvent event) {
         ProfileDTO p = accountVM.createAccount();
         if (p != null) {
-            Storage.setProfile(p);
-            viewHandler.openFavoriteCoursesScene();
+            storage.setProfile(p);
+            storage.goTo(Page.FAVORITE_COURSES);
         }
     }
 }
