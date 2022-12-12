@@ -2,10 +2,8 @@
 
 <?import javafx.scene.control.cell.*?>
 <?import javafx.scene.text.*?>
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.course.CourseController">
    <children>
@@ -22,7 +20,7 @@
       <Label layoutX="230.0" layoutY="97.0" text="Requirements:" />
       <Label fx:id="program" layoutX="72.0" layoutY="54.0" prefHeight="17.0" prefWidth="142.0" />
       <Label fx:id="ects" layoutX="56.0" layoutY="71.0" prefHeight="17.0" prefWidth="142.0" />
-      <Label fx:id="teachers" layoutX="67.0" layoutY="106.0" prefHeight="61.0" prefWidth="142.0" />
+      <Label fx:id="teachers" alignment="TOP_LEFT" layoutX="67.0" layoutY="106.0" prefHeight="61.0" prefWidth="142.0" />
       <Label fx:id="shortName" layoutX="88.0" layoutY="37.0" prefHeight="17.0" prefWidth="142.0" />
       <Label fx:id="description" alignment="TOP_LEFT" layoutX="310.0" layoutY="37.0" prefHeight="61.0" prefWidth="279.0" wrapText="true" />
       <Label fx:id="requirements" alignment="TOP_LEFT" layoutX="310.0" layoutY="97.0" prefHeight="61.0" prefWidth="279.0" wrapText="true" />
@@ -38,17 +36,17 @@
                     <PropertyValueFactory property="profileName" />
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn minWidth="100.0" prefWidth="409.0" text="Review">
+            <TableColumn minWidth="100.0" prefWidth="344.0" text="Review">
                 <cellValueFactory>
                     <PropertyValueFactory property="review" />
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn minWidth="0.0" text="Rate">
+            <TableColumn minWidth="0.0" prefWidth="41.0" text="Rate">
                 <cellValueFactory>
                     <PropertyValueFactory property="rate" />
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn minWidth="0.0" text="Date">
+            <TableColumn minWidth="0.0" prefWidth="100.0" text="Date">
                 <cellValueFactory>
                     <PropertyValueFactory property="date" />
                 </cellValueFactory>

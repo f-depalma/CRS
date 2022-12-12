@@ -3,11 +3,13 @@ package client.views.course;
 import client.model.Storage;
 import client.model.course.Course;
 import javafx.beans.property.*;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import shared.transferobject.dto.ReviewDTO;
 import shared.transferobject.dto.TeacherOfCourseDTO;
 
 import java.util.List;
+import java.util.Optional;
 
 public class CourseVM {
     private Course courseManager;
@@ -56,26 +58,36 @@ public class CourseVM {
         shortName.setValue(storage.getCourse().getShortName());
         program.setValue(storage.getCourse().getProgramShortName());
         ects.setValue(String.valueOf(storage.getCourse().getEcts()));
+        description.setValue(storage.getCourse().getDescription());
+        requirements.setValue(storage.getCourse().getRequirements());
 
         List<TeacherOfCourseDTO> teachers = courseManager.getTeacherByCourseName(storage.getCourse().getShortName());
         String teacherNames = "";
-        for (TeacherOfCourseDTO t : teachers) {
-            teacherNames += t.getTeacherName() + "\n";
+        if (teachers.size() > 0) {
+            for (TeacherOfCourseDTO t : teachers) {
+                teacherNames += t.getTeacherName() + "\n";
+            }
+            this.teachers.setValue(teacherNames.substring(0, teacherNames.length() - 2));
         }
-        this.teachers.setValue(teacherNames.substring(0, teacherNames.length() - 2));
-        List<ReviewDTO> reviews = courseManager.getAllReviews(storage.getCourse().getShortName());
 
-        int myReviewIdx = reviews.indexOf(reviews.stream().filter(r -> r.getProfileId() == storage.getProfile().getId()));
-        if (myReviewIdx < 0) {
-            isSave = true;
-            saveOrUpdate.setValue("Save");
-        } else {
-            ReviewDTO myReview = reviews.remove(myReviewIdx);
+        List<ReviewDTO> reviews = courseManager.getAllReviews(storage.getCourse().getShortName());
+        Optional<ReviewDTO> myReviewOpt = reviews
+                .stream()
+                .filter(r -> r.getProfileId() == storage.getProfile().getId())
+                .findFirst();
+
+        if (myReviewOpt.isPresent()) {
+            ReviewDTO myReview = myReviewOpt.get();
+            reviews.remove(myReview);
             review.setValue(myReview.getReview());
             rate.setValue(myReview.getRate());
             isSave = false;
             saveOrUpdate.setValue("Update");
+        } else {
+            isSave = true;
+            saveOrUpdate.setValue("Save");
         }
+        this.reviews.set(FXCollections.observableArrayList(reviews));
     }
 
     public StringProperty nameProperty() {

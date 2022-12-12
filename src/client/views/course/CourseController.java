@@ -7,8 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import shared.transferobject.dto.ReviewDTO;
 
-import java.awt.event.ActionEvent;
-
 public class CourseController implements ViewController {
     private CourseVM viewModel;
 
@@ -59,6 +57,7 @@ public class CourseController implements ViewController {
         ects.textProperty().bindBidirectional(viewModel.ectsProperty());
         rating.textProperty().bindBidirectional(viewModel.ratingProperty());
         teachers.textProperty().bindBidirectional(viewModel.teachersProperty());
+        description.textProperty().bindBidirectional(viewModel.descriptionProperty());
         requirements.textProperty().bindBidirectional(viewModel.requirementsProperty());
         review.textProperty().bindBidirectional(viewModel.reviewProperty());
         rate.valueProperty().bindBidirectional(viewModel.rateProperty());

@@ -66,4 +66,16 @@ public class ReviewDTO implements Serializable {
     public void setProfileName(String profileName) {
         this.profileName = profileName;
     }
+
+    @Override
+    public String toString() {
+        return "ReviewDTO{" +
+                "review='" + review + '\'' +
+                ", rate=" + rate +
+                ", date='" + date + '\'' +
+                ", courseName='" + courseName + '\'' +
+                ", profileName='" + profileName + '\'' +
+                ", profileId=" + profileId +
+                '}';
+    }
 }
