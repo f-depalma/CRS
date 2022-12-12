@@ -1,5 +1,6 @@
 package shared.networking;
 
+import server.database.entity.TeacherOfCourse;
 import shared.transferobject.dto.*;
 
 import java.rmi.Remote;
@@ -24,4 +25,6 @@ public interface RMIServer extends Remote {
     boolean saveReview(ReviewDTO reviewDTO) throws RemoteException;
 
     boolean updateReview(ReviewDTO reviewDTO) throws RemoteException;
+
+    List<TeacherOfCourseDTO> getTeachersByCourse(String courseName) throws RemoteException;
 }

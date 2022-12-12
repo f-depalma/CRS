@@ -1,10 +1,7 @@
 package client.network;
 
 
-import shared.transferobject.dto.CourseDTO;
-import shared.transferobject.dto.FavoriteCourseDTO;
-import shared.transferobject.dto.ProfileDTO;
-import shared.transferobject.dto.UserDTO;
+import shared.transferobject.dto.*;
 import shared.util.Subject;
 
 import java.util.List;
@@ -24,4 +21,12 @@ public interface Client extends Subject {
     List<CourseDTO> getAllCourses(String filter, int profileId);
 
     boolean addFavoriteCourses(List<FavoriteCourseDTO> favoriteCourseDTOS);
+
+    List<ReviewDTO> getAllReviews(String courseName);
+
+    boolean saveReview(ReviewDTO reviewDTO);
+
+    boolean updateReview(ReviewDTO reviewDTO);
+
+    List<TeacherOfCourseDTO> getTeachersByCourse(String courseName);
 }

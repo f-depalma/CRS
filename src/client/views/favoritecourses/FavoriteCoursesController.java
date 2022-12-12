@@ -7,10 +7,11 @@ import client.views.ViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
+import shared.transferobject.dto.CourseDTO;
 
 public class FavoriteCoursesController implements ViewController {
     @FXML
-    private TableView tableView;
+    private TableView<CourseDTO> tableView;
 
     private FavoriteCoursesVM favoriteCoursesVM;
     private Storage storage = Storage.get();
@@ -29,6 +30,15 @@ public class FavoriteCoursesController implements ViewController {
     @FXML
     void onRemoveFCButton(ActionEvent event) {
         this.favoriteCoursesVM.removeFavoriteCourses(tableView.getSelectionModel().getSelectedItems());
+    }
+
+    @FXML
+    void onDetail(ActionEvent event) {
+        CourseDTO course = tableView.getSelectionModel().getSelectedItem();
+        if (course != null) {
+            storage.setCourse(course);
+            storage.goTo(Page.COURSE);
+        }
     }
 
 }

@@ -5,10 +5,7 @@ import shared.transferobject.dto.ProfileDTO;
 import shared.util.UserType;
 import shared.util.Utils;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class ProfileMapper implements Mapper<Profile, ProfileDTO> {
+public class ProfileMapper extends Mapper<Profile, ProfileDTO> {
     private static ProfileMapper instance = null;
 
     private ProfileMapper() {}
@@ -47,27 +44,5 @@ public class ProfileMapper implements Mapper<Profile, ProfileDTO> {
         entity.setBirthday(Utils.stringToDate(dto.getBirthday()));
         entity.setType(UserType.getValue(dto.getType()));
         return entity;
-    }
-
-    @Override
-    public List<ProfileDTO> allEntitiesToDTOs(List<Profile> entities) {
-        List<ProfileDTO> dtos = new ArrayList<>();
-
-        for (Profile entity : entities) {
-            dtos.add(entityToDTO(entity));
-        }
-
-        return dtos;
-    }
-
-    @Override
-    public List<Profile> allDTOsToEntities(List<ProfileDTO> dtos) {
-        List<Profile> entities = new ArrayList<>();
-
-        for (ProfileDTO dto : dtos) {
-            entities.add(DTOToEntity(dto));
-        }
-
-        return entities;
     }
 }

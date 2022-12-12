@@ -107,14 +107,14 @@ public class ViewHandler {
     private void openCourseScene() {
         if (courseScene == null) {
             try {
-                Parent root = loadFXML("../../client/views/courses/courses.fxml");
+                Parent root = loadFXML("../../client/views/course/course.fxml");
                 courseScene = new Scene(root);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
         stage.setTitle("Course");
-        vmf.getCoursesVM().getAllCourses("");
+        vmf.getCourseVM().loadData();
         stage.setScene(courseScene);
         stage.show();
     }

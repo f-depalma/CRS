@@ -1,7 +1,7 @@
 package client.core;
 
-import client.model.favoritecourses.FavoriteCourses;
 import client.views.account.AccountVM;
+import client.views.course.CourseVM;
 import client.views.courses.CoursesVM;
 import client.views.favoritecourses.FavoriteCoursesVM;
 import client.views.login.LoginVM;
@@ -12,6 +12,7 @@ public class ViewModelFactory {
     private AccountVM accountViewModel;
     private FavoriteCoursesVM favoriteCoursesViewModel;
     private CoursesVM coursesViewModel;
+    private CourseVM courseViewModel;
 
     public ViewModelFactory(ModelFactory mf) {
         this.mf = mf;
@@ -39,5 +40,11 @@ public class ViewModelFactory {
         return (coursesViewModel = coursesViewModel == null ?
                 new CoursesVM(mf.getCoursesM()) :
                 coursesViewModel);
+    }
+
+    public CourseVM getCourseVM() {
+        return (courseViewModel = courseViewModel == null ?
+                new CourseVM(mf.getCourseM()) :
+                courseViewModel);
     }
 }

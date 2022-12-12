@@ -6,9 +6,9 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 public interface ReviewManager {
-    List<Review> getAllReviews(String courseName) throws RemoteException;
+    List<Review> getAllReviews(String courseName);
 
-    boolean saveReview(Review review) throws RemoteException;
+    boolean saveReview(Review review);
 
-    boolean updateReview(Review review) throws RemoteException;
+    boolean updateReview(Review review);
 }

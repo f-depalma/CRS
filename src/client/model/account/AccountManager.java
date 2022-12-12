@@ -15,8 +15,6 @@ public class AccountManager implements Account {
 
     public AccountManager(Client client) {
         this.client = client;
-        client.startClient();
-        //client.addListener("Message", this::fire);
     }
 
     private void fire(PropertyChangeEvent evt) {

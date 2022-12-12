@@ -3,6 +3,7 @@ package server.networking;
 import server.model.CourseManager;
 import server.model.LoginManager;
 import server.model.ReviewManager;
+import server.model.TeacherManager;
 import shared.networking.RMIServer;
 import shared.transferobject.dto.*;
 import shared.transferobject.mapper.*;
@@ -21,15 +22,18 @@ public class RMIServerImpl implements RMIServer {
     private CourseMapper courseMapper;
     private FavoriteCourseMapper favoriteCourseMapper;
     private ReviewMapper reviewMapper;
+    private TeacherOfCourseMapper teacherOfCourseMapper;
 
     private LoginManager loginManager;
     private CourseManager courseManager;
     private ReviewManager reviewManager;
+    private TeacherManager teacherManager;
 
     public RMIServerImpl(
             LoginManager loginManager,
             CourseManager courseManager,
-            ReviewManager reviewManager
+            ReviewManager reviewManager,
+            TeacherManager teacherManager
     ) throws RemoteException {
 
         UnicastRemoteObject.exportObject(this, 0);
@@ -38,10 +42,12 @@ public class RMIServerImpl implements RMIServer {
         this.courseMapper = CourseMapper.getInstance();
         this.favoriteCourseMapper = FavoriteCourseMapper.getInstance();
         this.reviewMapper = ReviewMapper.getInstance();
+        this.teacherOfCourseMapper = TeacherOfCourseMapper.getInstance();
 
         this.loginManager = loginManager;
         this.courseManager = courseManager;
         this.reviewManager = reviewManager;
+        this.teacherManager = teacherManager;
     }
 
     public void startServer() {
@@ -97,6 +103,11 @@ public class RMIServerImpl implements RMIServer {
     @Override
     public List<ReviewDTO> getAllReviews(String courseName) throws RemoteException {
         return reviewMapper.allEntitiesToDTOs(reviewManager.getAllReviews(courseName));
+    }
+
+    @Override
+    public List<TeacherOfCourseDTO> getTeachersByCourse(String courseName) throws RemoteException {
+        return teacherOfCourseMapper.allEntitiesToDTOs(teacherManager.getTeachersByCourse(courseName));
     }
 
     @Override

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.course.CourseController">
+   <children>
+      <Label fx:id="name" layoutX="14.0" layoutY="14.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="37.0" text="Short name:" />
+      <Label layoutX="14.0" layoutY="54.0" text="Program:" />
+      <Label layoutX="14.0" layoutY="71.0" text="ECTS:" />
+      <Label layoutX="14.0" layoutY="88.0" text="Rating:" />
+      <Label layoutX="237.0" layoutY="37.0" text="Desctiption:" />
+      <Label layoutX="230.0" layoutY="97.0" text="Requirements:" />
+      <Label fx:id="program" layoutX="72.0" layoutY="54.0" prefHeight="17.0" prefWidth="142.0" />
+      <Label fx:id="ects" layoutX="56.0" layoutY="71.0" prefHeight="17.0" prefWidth="142.0" />
+      <Label fx:id="teachers" layoutX="67.0" layoutY="106.0" prefHeight="61.0" prefWidth="142.0" />
+      <Label fx:id="shortName" layoutX="88.0" layoutY="37.0" prefHeight="17.0" prefWidth="142.0" />
+      <Label fx:id="description" alignment="TOP_LEFT" layoutX="310.0" layoutY="37.0" prefHeight="61.0" prefWidth="279.0" wrapText="true" />
+      <Label fx:id="requirements" alignment="TOP_LEFT" layoutX="310.0" layoutY="97.0" prefHeight="61.0" prefWidth="279.0" wrapText="true" />
+      <Label layoutX="14.0" layoutY="106.0" text="Teacher:" />
+      <Label fx:id="rating" layoutX="56.0" layoutY="88.0" prefHeight="17.0" prefWidth="142.0" />
+      <TextArea fx:id="review" layoutX="14.0" layoutY="179.0" prefHeight="86.0" prefWidth="470.0" />
+      <Label layoutX="502.0" layoutY="179.0" text="Rate:" />
+      <Slider fx:id="rate" blockIncrement="1.0" layoutX="492.0" layoutY="205.0" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="1" prefHeight="16.0" prefWidth="94.0" showTickLabels="true" />
+      <TableView fx:id="reviews" layoutX="14.0" layoutY="286.0" prefHeight="245.0" prefWidth="570.0">
+        <columns>
+            <TableColumn minWidth="79.0" prefWidth="81.0" text="User">
+                <cellValueFactory>
+                    <PropertyValueFactory property="profileName" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn minWidth="100.0" prefWidth="409.0" text="Review">
+                <cellValueFactory>
+                    <PropertyValueFactory property="review" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn minWidth="0.0" text="Rate">
+                <cellValueFactory>
+                    <PropertyValueFactory property="rate" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn minWidth="0.0" text="Date">
+                <cellValueFactory>
+                    <PropertyValueFactory property="date" />
+                </cellValueFactory>
+            </TableColumn>
+        </columns>
+      </TableView>
+      <Button fx:id="saveOrUpdate" layoutX="497.0" layoutY="237.0" mnemonicParsing="false" onAction="#onSaveOrUpdate" text="Button" />
+      <Button layoutX="512.0" layoutY="550.0" mnemonicParsing="false" onAction="#onBack" text="Back" />
+   </children>
+</AnchorPane>

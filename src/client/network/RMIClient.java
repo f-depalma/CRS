@@ -1,10 +1,7 @@
 package client.network;
 
 import shared.networking.RMIServer;
-import shared.transferobject.dto.CourseDTO;
-import shared.transferobject.dto.FavoriteCourseDTO;
-import shared.transferobject.dto.ProfileDTO;
-import shared.transferobject.dto.UserDTO;
+import shared.transferobject.dto.*;
 
 import java.beans.PropertyChangeSupport;
 import java.rmi.Remote;
@@ -106,6 +103,47 @@ public class RMIClient implements Client, Remote {
     }
 
     @Override
+    public List<ReviewDTO> getAllReviews(String courseName) {
+        try {
+            return server.getAllReviews(courseName);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public boolean saveReview(ReviewDTO reviewDTO) {
+        try {
+            return server.saveReview(reviewDTO);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean updateReview(ReviewDTO reviewDTO) {
+        try {
+            return server.updateReview(reviewDTO);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public List<TeacherOfCourseDTO> getTeachersByCourse(String courseName) {
+        try {
+            return server.getTeachersByCourse(courseName);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // OBSERVER
+    @Override
     public void addListener(String eventName, PropertyChangeListener listener) {
         support.addPropertyChangeListener(eventName, listener);
     }
@@ -114,6 +152,4 @@ public class RMIClient implements Client, Remote {
     public void removeListener(String eventName, PropertyChangeListener listener) {
         support.removePropertyChangeListener(eventName, listener);
     }
-
-
 }

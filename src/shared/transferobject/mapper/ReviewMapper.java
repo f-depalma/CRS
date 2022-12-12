@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class ReviewMapper implements Mapper<Review, ReviewDTO> {
+public class ReviewMapper extends Mapper<Review, ReviewDTO> {
     private static ReviewMapper instance = null;
     private ProfileDao profileDao;
 
@@ -48,30 +48,8 @@ public class ReviewMapper implements Mapper<Review, ReviewDTO> {
         Review entity = new Review();
         entity.setReview(dto.getReview());
         entity.setRate(dto.getRate());
-        entity.setDate(Utils.stringToDate(dto.getDate()));
         entity.setProfileId(dto.getProfileId());
-        return null;
-    }
-
-    @Override
-    public List<ReviewDTO> allEntitiesToDTOs(List<Review> entities) {
-        List<ReviewDTO> dtos = new ArrayList<>();
-
-        for (Review entity : entities) {
-            dtos.add(entityToDTO(entity));
-        }
-
-        return dtos;
-    }
-
-    @Override
-    public List<Review> allDTOsToEntities(List<ReviewDTO> dtos) {
-        List<Review> entities = new ArrayList<>();
-
-        for (ReviewDTO dto : dtos) {
-            entities.add(DTOToEntity(dto));
-        }
-
-        return entities;
+        entity.setCourseName(dto.getCourseName());
+        return entity;
     }
 }

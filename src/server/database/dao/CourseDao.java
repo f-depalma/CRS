@@ -29,6 +29,9 @@ public class CourseDao implements Dao<Course> {
         course.setShortName(res.getString("short_name"));
         course.setName(res.getString("name"));
         course.setProgramShortName(res.getString("program_name"));
+        course.setEcts(res.getInt("ects"));
+        course.setDescription(res.getString("description"));
+        course.setRequirements(res.getString("requirements"));
         return course;
     }
 

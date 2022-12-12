@@ -15,8 +15,6 @@ public class LoginManager implements Login {
 
     public LoginManager(Client client) {
         this.client = client;
-        client.startClient();
-        //client.addListener("Message", this::fire);
     }
 
     private void fire(PropertyChangeEvent evt) {

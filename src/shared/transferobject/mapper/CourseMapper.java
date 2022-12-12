@@ -3,10 +3,7 @@ package shared.transferobject.mapper;
 import server.database.entity.Course;
 import shared.transferobject.dto.CourseDTO;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class CourseMapper implements Mapper<Course, CourseDTO> {
+public class CourseMapper extends Mapper<Course, CourseDTO> {
 
     private static CourseMapper instance = null;
 
@@ -21,7 +18,11 @@ public class CourseMapper implements Mapper<Course, CourseDTO> {
 
     @Override
     public CourseDTO entityToDTO(Course entity) {
-        return new CourseDTO(entity.getShortName(), entity.getName(), entity.getProgramShortName());
+        CourseDTO dto = new CourseDTO(entity.getShortName(), entity.getName(), entity.getProgramShortName());
+        dto.setDescription(entity.getDescription());
+        dto.setEcts(entity.getEcts());
+        dto.setRequirements(entity.getRequirements());
+        return dto;
     }
 
     @Override
@@ -30,28 +31,9 @@ public class CourseMapper implements Mapper<Course, CourseDTO> {
         entity.setShortName(dto.getShortName());
         entity.setName(dto.getName());
         entity.setProgramShortName(dto.getProgramShortName());
+        entity.setDescription(dto.getDescription());
+        entity.setEcts(dto.getEcts());
+        entity.setRequirements(dto.getRequirements());
         return entity;
-    }
-
-    @Override
-    public List<CourseDTO> allEntitiesToDTOs(List<Course> entities) {
-        List<CourseDTO> dtos = new ArrayList<>();
-
-        for (Course entity : entities) {
-            dtos.add(entityToDTO(entity));
-        }
-
-        return dtos;
-    }
-
-    @Override
-    public List<Course> allDTOsToEntities(List<CourseDTO> dtos) {
-        List<Course> entities = new ArrayList<>();
-
-        for (CourseDTO dto : dtos) {
-            entities.add(DTOToEntity(dto));
-        }
-
-        return entities;
     }
 }
