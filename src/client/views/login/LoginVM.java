@@ -26,10 +26,11 @@ public class LoginVM {
         String password = inputPassword.get();
         if (checker(username) && checker(password)) {
             error.set("");
+            return loginManager.login(username, password);
         } else {
             error.set("No matching username or password");
+            return null;
         }
-        return loginManager.login(username, password);
     }
 
     public StringProperty getInputUser() {
