@@ -2,11 +2,10 @@ package client.network;
 
 
 import shared.transferobject.dto.*;
-import shared.util.Subject;
 
 import java.util.List;
 
-public interface Client extends Subject {
+public interface Client {
 
     void startClient();
 

@@ -3,24 +3,20 @@ package client.network;
 import shared.networking.RMIServer;
 import shared.transferobject.dto.*;
 
-import java.beans.PropertyChangeSupport;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.NotBoundException;
-import java.beans.PropertyChangeListener;
 import java.util.List;
 
 public class RMIClient implements Client, Remote {
 
-    private PropertyChangeSupport support;
     private String name;
     private RMIServer server;
 
     public RMIClient() {
-        support = new PropertyChangeSupport(this);
         try {
             UnicastRemoteObject.exportObject(this, 0);
         } catch (RemoteException e) {
@@ -140,16 +136,5 @@ public class RMIClient implements Client, Remote {
             e.printStackTrace();
         }
         return null;
-    }
-
-    // OBSERVER
-    @Override
-    public void addListener(String eventName, PropertyChangeListener listener) {
-        support.addPropertyChangeListener(eventName, listener);
-    }
-
-    @Override
-    public void removeListener(String eventName, PropertyChangeListener listener) {
-        support.removePropertyChangeListener(eventName, listener);
     }
 }

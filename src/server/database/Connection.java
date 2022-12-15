@@ -1,6 +1,5 @@
 package server.database;
 
-import java.security.PublicKey;
 import java.sql.Array;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

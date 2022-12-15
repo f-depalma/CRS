@@ -1,10 +1,8 @@
 package client.model.login;
 
 import shared.transferobject.dto.ProfileDTO;
-import shared.transferobject.dto.UserDTO;
-import shared.util.Subject;
 
-public interface Login extends Subject {
+public interface Login {
     ProfileDTO login(String username, String password);
 }
 

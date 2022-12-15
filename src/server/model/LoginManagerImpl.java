@@ -5,20 +5,20 @@ import server.database.dao.UserDao;
 import server.database.entity.Profile;
 import server.database.entity.User;
 
-import java.beans.PropertyChangeSupport;
 import java.util.Optional;
 
 public class LoginManagerImpl implements LoginManager {
-    private PropertyChangeSupport support;
+
+    private ProfileDao profileDao;
+    private UserDao userDao;
 
     public LoginManagerImpl() {
-        this.support = new PropertyChangeSupport(this);
+        this.profileDao = ProfileDao.getInstance();
+        this.userDao = UserDao.getInstance();
     }
 
     @Override
     public Profile login(User user) {
-        ProfileDao profileDao = ProfileDao.getInstance();
-        UserDao userDao = UserDao.getInstance();
         Profile profile = null;
 
         Optional<Integer> userIdOpt = userDao.getIdByUsernameAndPassword(user.getUsername(), user.getPassword());
@@ -36,8 +36,6 @@ public class LoginManagerImpl implements LoginManager {
 
     @Override
     public Profile createAccount(User user, Profile profile) {
-        UserDao userDao = UserDao.getInstance();
-        ProfileDao profileDao = ProfileDao.getInstance();
         userDao.save(user);
 
         Optional<Integer> userIdOpt = userDao.getIdByUsernameAndPassword(user.getUsername(), user.getPassword());

@@ -1,6 +1,5 @@
 package shared.networking;
 
-import server.database.entity.TeacherOfCourse;
 import shared.transferobject.dto.*;
 
 import java.rmi.Remote;
