@@ -13,7 +13,6 @@ import java.util.List;
 
 public class RMIClient implements Client, Remote {
 
-    private String name;
     private RMIServer server;
 
     public RMIClient() {
@@ -39,8 +38,6 @@ public class RMIClient implements Client, Remote {
     public ProfileDTO login(UserDTO userDTO) {
         try {
             ProfileDTO dto = server.login(userDTO);
-            List<CourseDTO> courses = server.getFavoriteCourses(dto.getId());
-            System.out.println(courses);
             return dto;
         } catch (RemoteException e) {
             e.printStackTrace();

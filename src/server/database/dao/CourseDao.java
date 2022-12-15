@@ -50,10 +50,11 @@ public class CourseDao implements Dao<Course> {
         List<Course> courses = new ArrayList<>();
 
         try {
-            PreparedStatement statement = con.prepareStatement(QueriesBook.SELECT_FROM_COURSE_WHERE_NAME_LIKE_NOT_IN_FAVORITE);
+            PreparedStatement statement = con.prepareStatement(
+                    QueriesBook.SELECT_FROM_COURSE_WHERE_NAME_LIKE_NOT_IN_FAVORITE
+            );
             statement.setInt(1, profileId);
             statement.setString(2, "%" + (filter == null? "": filter) + "%");
-            System.out.println(statement);
             ResultSet res = statement.executeQuery();
 
             while (res.next()) {

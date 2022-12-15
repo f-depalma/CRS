@@ -23,7 +23,6 @@ public class QueriesBook {
     public static final String SELECT_FROM_REVIEW_WHERE_COURSE_MAME = "select * from review where course_name = ?";
     public static final String INSERT_INTO_REVIEW_ALL_VALUES = "INSERT INTO review(review, rate, review_date, profile_id, course_name) VALUES (?, ?, ?, ?, ?)";
     public static final String UPDATE_REVIEW_SET_REVIEW_RATE_REVIEW_DATE_WHERE_PROFILE_ID_AND_COURSE_NAME = "UPDATE review SET review = ?, rate = ?, review_date = ? where profile_id = ? and course_name = ?";
-
     //TEACHER OF COURSE
     public static final String SELECT_FROM_TEACHER_OF_COURSE_WHERE_COURSE_NAME = "select * from teacher_of_course where course_name = ?";
 }
