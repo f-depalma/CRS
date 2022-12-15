@@ -72,8 +72,10 @@ public class ReviewDao implements Dao<Review> {
         try {
             PreparedStatement statement = con.prepareStatement(QueriesBook.INSERT_INTO_REVIEW_ALL_VALUES);
             setStatement(statement, t);
-            statement.executeUpdate();
-        } catch (SQLException e) {
+            if (statement.executeUpdate() <= 0) {
+                throw new Exception("Element not saved");
+            }
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -88,8 +90,10 @@ public class ReviewDao implements Dao<Review> {
             PreparedStatement statement = con.prepareStatement(
                     QueriesBook.UPDATE_REVIEW_SET_REVIEW_RATE_REVIEW_DATE_WHERE_PROFILE_ID_AND_COURSE_NAME);
             setStatement(statement, t);
-            statement.executeUpdate();
-        } catch (SQLException e) {
+            if (statement.executeUpdate() <= 0) {
+                throw new Exception("Element not updated");
+            }
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }

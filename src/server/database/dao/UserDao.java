@@ -71,9 +71,11 @@ public class UserDao implements Dao<User> {
             PreparedStatement statement = conn.prepareStatement(QueriesBook.INSERT_INTO_APP_USER_ALL_VALUES);
             statement.setString(1, user.getUsername());
             statement.setString(2, user.getPassword());
-            statement.executeUpdate();
+            if (statement.executeUpdate() <= 0) {
+                throw new Exception("Element not saved");
+            }
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }

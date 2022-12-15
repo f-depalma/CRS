@@ -72,8 +72,10 @@ public class ProfileDao implements Dao<Profile> {
             statement.setDate(5, profile.getBirthday());
             statement.setString(6, profile.getType());
 
-            statement.executeUpdate();
-        } catch (SQLException e) {
+            if (statement.executeUpdate() <= 0) {
+                throw new Exception("Element not saved");
+            }
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }

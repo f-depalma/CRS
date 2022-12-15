@@ -47,8 +47,10 @@ public class FavoriteCourseDao implements Dao<FavoriteCourse> {
             PreparedStatement statement = con.prepareStatement(QueriesBook.INSERT_INTO_FAVORITE_COURSE_ALL_VALUES);
             statement.setString(1, t.getCourseShortName());
             statement.setInt(2, t.getProfileId());
-            statement.executeUpdate();
-        } catch (SQLException e) {
+            if (statement.executeUpdate() <= 0) {
+                throw new Exception("Element not saved");
+            }
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -69,8 +71,10 @@ public class FavoriteCourseDao implements Dao<FavoriteCourse> {
             PreparedStatement statement = con.prepareStatement(QueriesBook.DELETE_FROM_FAVORITE_COURSE_WHERE_SHORT_NAME_AND_PROFILE_ID);
             statement.setString(1, t.getCourseShortName());
             statement.setInt(2, t.getProfileId());
-            statement.executeUpdate();
-        } catch (SQLException e) {
+            if (statement.executeUpdate() <= 0) {
+                throw new Exception("Element not deleted");
+            }
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }

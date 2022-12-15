@@ -18,7 +18,7 @@ public class DBConnector {
 
     private static Deque<Connection> connections = new ArrayDeque<>();
 
-    public static Connection getConnection() {
+    public static synchronized Connection getConnection() {
         int toCheck = connections.size();
 
         while (toCheck > 0) {
